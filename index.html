@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -15,7 +16,8 @@
       font-family: 'Cairo', sans-serif;
       background-color: #030308;
       color: #fff;
-      overflow: hidden;
+      overflow-x: hidden; /* نمنع التمرير الأفقي فقط */
+      overflow-y: auto;   /* نسمح بالتمرير العمودي */
     }
 
     canvas {
@@ -67,6 +69,7 @@
       transition: opacity 1s ease;
       z-index: 5;
       padding: 80px 20px;
+      min-height: 100vh; /* ضمان أن المحتوى يمتد على طول الشاشة */
     }
 
     header h1 {
@@ -129,6 +132,7 @@
       color: #888;
       font-size: 0.9rem;
       animation: fadeIn 1.5s ease forwards;
+      padding-bottom: 30px; /* مسافة إضافية لضمان وضوح التاريخ */
     }
 
     /* حركات عامة */
