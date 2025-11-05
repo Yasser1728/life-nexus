@@ -1,147 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NX.PI – Network Experience Powered by AI</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle at center, #1a001f 0%, #000 100%);
-      color: #fff;
-      font-family: "Poppins", Arial, sans-serif;
-      text-align: center;
-      overflow: hidden;
-      transition: background 0.5s ease;
-    }
-    h1 {
-      color: #a66bff;
-      text-shadow: 0 0 25px #a66bff;
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-    }
-    p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 40px;
-    }
-    .btn {
-      display: block;
-      background: rgba(166, 107, 255, 0.2);
-      color: white;
-      border: 2px solid #a66bff;
-      border-radius: 50px;
-      padding: 14px 30px;
-      margin: 10px 0;
-      width: 220px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 0 25px rgba(166, 107, 255, 0.5);
-      transition: all 0.3s ease;
-    }
-    .btn:hover {
-      background: #a66bff;
-      color: #000;
-      box-shadow: 0 0 40px #a66bff;
-      transform: scale(1.05);
-    }
-    .toggle-mode {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #a66bff;
-      color: #000;
-      border: none;
-      border-radius: 30px;
-      padding: 8px 15px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.9rem;
-      box-shadow: 0 0 15px #a66bff;
-      transition: 0.3s;
-    }
-    .toggle-mode:hover {
-      background: #c9a3ff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DX.PI - Life Nexus</title>
+    <style>
+        /* * 1. Basic Setup & Variables 
+         */
+        :root {
+            --bg-color: #1a0033; /* Darker Purple Background (Darker than original VIP) */
+            --bg-light-color: #2e005c; /* Lighter shade for the card/glow */
+            --primary-purple: #bb86fc; /* Main Purple (Movable) */
+            --text-color: #ffffff;
+            --logo-glow: #e0b4ff; /* Stronger glow color */
+            --button-glow: #d8c2ff;
+        }
 
-    /* Light Mode */
-    body.light {
-      background: linear-gradient(145deg, #ffffff, #e6dbff);
-      color: #000;
-    }
-    body.light .btn {
-      border-color: #7b2ff7;
-      color: #000;
-      box-shadow: 0 0 25px rgba(123, 47, 247, 0.3);
-    }
-    body.light .btn:hover {
-      background: #7b2ff7;
-      color: #fff;
-    }
-    body.light .toggle-mode {
-      background: #7b2ff7;
-      color: #fff;
-      box-shadow: 0 0 15px #7b2ff7;
-    }
+        /* * 2. Body and Layout 
+         */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Hide the scrolling bar for cosmic effect */
+            position: relative;
+            text-align: center;
+            direction: ltr; /* Set direction for button text */
+        }
 
-    /* Floating glow particles */
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(166, 107, 255, 0.3);
-      animation: float 10s infinite;
-    }
-    @keyframes float {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(-50px);
-        opacity: 0.4;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-  </style>
+        .container {
+            z-index: 10;
+            padding: 20px;
+            max-width: 400px;
+        }
+
+        /* * 3. Cosmic Background Effect (مؤثرات الخلفية)
+         */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px, 100px 100px;
+            animation: stars-move 120s linear infinite;
+        }
+
+        @keyframes stars-move {
+            from { background-position: 0 0, 0 0; }
+            to { background-position: 100% 100%, -100% -100%; }
+        }
+
+        /* * 4. Logo and Slogan Styling 
+         */
+        .logo {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 5px;
+            color: var(--primary-purple);
+            text-shadow: 0 0 15px var(--logo-glow), 0 0 5px var(--primary-purple); /* Logo Glow */
+        }
+
+        .slogan {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            color: var(--primary-purple);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        /* * 5. Button Styling 
+         */
+        .buttons-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            width: 300px;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 40px; /* Highly rounded */
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            color: var(--bg-color); /* Dark text on light button */
+            background: var(--primary-purple);
+            box-shadow: 0 0 20px var(--button-glow), inset 0 0 10px rgba(255, 255, 255, 0.5); /* Button Glow */
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: scale(1.03); /* Scale up on hover */
+            opacity: 0.95;
+            box-shadow: 0 0 30px var(--button-glow), inset 0 0 15px rgba(255, 255, 255, 0.7);
+        }
+        
+        /* * 6. Toggle Switch (Optional) 
+         */
+        .toggle-switch {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            /* Placeholder styling for the toggle icon (not functional in this pure HTML/CSS) */
+        }
+        .toggle-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .toggle-icon:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-  <button class="toggle-mode" onclick="toggleMode()">Dark / Light ☾</button>
+    <div class="stars"></div>
+    
+    <div class="toggle-switch">
+        <span class="toggle-icon">🌙 / 💡</span>
+    </div>
 
-  <h1>NX.PI</h1>
-  <p>Network Experience Powered by AI</p>
+    <div class="container">
+        
+        <h1 class="logo">DX.PI</h1>
+        <p class="slogan">Transform Your Business with AI.</p>
 
-  <a href="#" class="btn" onclick="alert('Welcome to NX Intelligence!')">ENTER NETWORK</a>
-  <a href="#" class="btn" onclick="alert('Connecting AI Systems...')">CONNECT SYSTEM</a>
-  <a href="https://yasser1728.github.io/life-nexus/" class="btn">BACK TO HOME</a>
-
-  <script>
-    // Toggle dark/light mode
-    function toggleMode() {
-      document.body.classList.toggle('light');
-    }
-
-    // Floating particles effect
-    for (let i = 0; i < 30; i++) {
-      let p = document.createElement('div');
-      p.classList.add('particle');
-      p.style.width = p.style.height = Math.random() * 6 + 'px';
-      p.style.top = Math.random() * 100 + '%';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.animationDuration = Math.random() * 10 + 5 + 's';
-      document.body.appendChild(p);
-    }
-  </script>
+        <div class="buttons-group">
+            <button class="btn">START NOW</button>
+            <button class="btn">AI CONSULTATION</button>
+            <button class="btn">BACK TO HOME</button>
+        </div>
+    </div>
 </body>
 </html>
