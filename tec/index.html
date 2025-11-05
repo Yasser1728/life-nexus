@@ -3,113 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TEC.PI – Interactive Glow Particles</title>
+<title>TEC.PI – Future Technology Hub</title>
 <style>
-body {
+*{box-sizing:border-box;}
+body{
   margin:0;
+  height:100vh;
   overflow:hidden;
-  background:#10002b;
-  color:#fff;
+  background: radial-gradient(circle at center, #10002b 0%, #000 100%);
   font-family:"Poppins",Arial,sans-serif;
+  position:relative;
 }
-.toggle-mode {
+.toggle-mode{
   position:absolute;
   top:20px;
   right:20px;
-  padding:8px 15px;
   background:#a64eff;
   color:#000;
   border:none;
   border-radius:30px;
-  font-weight:bold;
+  padding:8px 15px;
   cursor:pointer;
+  font-weight:bold;
+  font-size:0.9rem;
   box-shadow:0 0 15px #a64eff;
   z-index:10;
+  transition:0.3s;
 }
-body.light {
-  background:#fff;
+body.light{
+  background: linear-gradient(145deg, #ffffff, #efe3ff);
+}
+body.light .toggle-mode{ background:#7d33ff; color:#fff; }
+h1{
+  color:#a64eff;
+  text-shadow:0 0 30px #a64eff;
+  font-size:3rem;
+  text-align:center;
+  margin-top:100px;
+}
+body.light h1{ color:#7d33ff; text-shadow:0 0 25px #7d33ff; }
+p{ font-size:1.2rem; color:#ccc; text-align:center; margin-bottom:40px; }
+body.light p{ color:#333; }
+.btn{
+  display:block;
+  background: rgba(166,78,255,0.15);
+  color:white;
+  border:2px solid #a64eff;
+  border-radius:50px;
+  padding:14px 30px;
+  margin:10px auto;
+  width:230px;
+  font-size:1.1rem;
+  font-weight:bold;
+  text-decoration:none;
+  box-shadow:0 0 25px rgba(166,78,255,0.4);
+  text-align:center;
+  transition:all 0.3s ease;
+}
+.btn:hover{
+  background:#a64eff;
   color:#000;
+  transform:scale(1.05);
+  box-shadow:0 0 40px #a64eff;
 }
-body.light .toggle-mode {
-  background:#7d33ff;
-  color:#fff;
+body.light .btn{ border-color:#7d33ff; color:#000; box-shadow:0 0 25px rgba(125,51,255,0.3); }
+body.light .btn:hover{ background:#7d33ff; color:#fff; box-shadow:0 0 35px #7d33ff; }
+
+.particle{
+  position:absolute;
+  border-radius:50%;
+  background: rgba(166,78,255,0.5);
 }
+body.light .particle{ background: rgba(125,51,255,0.5);}
 </style>
 </head>
 <body>
-<button class="toggle-mode" onclick="document.body.classList.toggle('light')">Toggle Mode</button>
-<canvas id="c"></canvas>
+
+<button class="toggle-mode" onclick="document.body.classList.toggle('light')">Dark / Light ☾</button>
+
+<h1>TEC.PI</h1>
+<p>Innovating the Future of Technology and AI Systems</p>
+
+<a href="#" class="btn" onclick="alert('Launching Future Systems...')">LAUNCH SYSTEM</a>
+<a href="#" class="btn" onclick="alert('Activating Neural Tech...')">ACTIVATE TEC.AI</a>
+<a href="https://yasser1728.github.io/life-nexus/" class="btn">BACK TO HOME</a>
 
 <script>
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
-let w = canvas.width = window.innerWidth;
-let h = canvas.height = window.innerHeight;
-
-window.addEventListener('resize', () => { 
-  w = canvas.width = window.innerWidth; 
-  h = canvas.height = window.innerHeight; 
-});
-
-class Particle {
-  constructor(){
-    this.x = Math.random() * w;
-    this.y = Math.random() * h;
-    this.vx = (Math.random() - 0.5) * 1.5;
-    this.vy = (Math.random() - 0.5) * 1.5;
-    this.size = Math.random() * 3 + 1;
-    this.trail = [];
-  }
-  update(){
-    this.x += this.vx;
-    this.y += this.vy;
-    if(this.x < 0 || this.x > w) this.vx *= -1;
-    if(this.y < 0 || this.y > h) this.vy *= -1;
-
-    this.trail.push({x:this.x, y:this.y});
-    if(this.trail.length > 15) this.trail.shift();
-  }
-  draw(){
-    for(let i=0; i < this.trail.length-1; i++){
-      const p1 = this.trail[i];
-      const p2 = this.trail[i+1];
-      const alpha = i / this.trail.length;
-      ctx.strokeStyle = document.body.classList.contains('light') ? `rgba(125,51,255,${alpha})` : `rgba(166,78,255,${alpha})`;
-      ctx.lineWidth = this.size;
-      ctx.beginPath();
-      ctx.moveTo(p1.x, p1.y);
-      ctx.lineTo(p2.x, p2.y);
-      ctx.stroke();
-    }
-    ctx.fillStyle = document.body.classList.contains('light') ? '#7d33ff' : '#a64eff';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-    ctx.fill();
-  }
+let particles=[];
+let particleCount=50;
+for(let i=0;i<particleCount;i++){
+  let p=document.createElement('div');
+  p.classList.add('particle');
+  p.style.width=p.style.height=(Math.random()*6+4)+'px';
+  p.style.top=Math.random()*window.innerHeight+'px';
+  p.style.left=Math.random()*window.innerWidth+'px';
+  document.body.appendChild(p);
+  p.vx=(Math.random()-0.5)*1.5;
+  p.vy=(Math.random()-0.5)*1.5;
+  particles.push(p);
 }
 
-let particles = [];
-for(let i=0; i<150; i++) particles.push(new Particle());
-
-canvas.addEventListener('mousemove', e=>{
-  particles.forEach(p=>{
-    let dx = p.x - e.clientX;
-    let dy = p.y - e.clientY;
-    let dist = Math.sqrt(dx*dx + dy*dy);
-    if(dist < 100){
-      p.vx += dx * 0.0005;
-      p.vy += dy * 0.0005;
-    }
-  });
-});
-
 function animate(){
-  ctx.fillStyle = document.body.classList.contains('light') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
-  ctx.fillRect(0,0,w,h);
-  particles.forEach(p => { p.update(); p.draw(); });
+  particles.forEach(p=>{
+    let x=parseFloat(p.style.left);
+    let y=parseFloat(p.style.top);
+    x+=p.vx; y+=p.vy;
+    if(x<0||x>window.innerWidth)p.vx*=-1;
+    if(y<0||y>window.innerHeight)p.vy*=-1;
+    p.style.left=x+'px';
+    p.style.top=y+'px';
+  });
   requestAnimationFrame(animate);
 }
 animate();
+
+// Mouse / Touch interaction
+function attractParticles(x,y){
+  particles.forEach(p=>{
+    let px=parseFloat(p.style.left);
+    let py=parseFloat(p.style.top);
+    let dx=x-px, dy=y-py;
+    let dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<120){ p.vx+=dx*0.003; p.vy+=dy*0.003; }
+  });
+}
+window.addEventListener('mousemove', e=>attractParticles(e.clientX,e.clientY));
+window.addEventListener('touchmove', e=>{
+  if(e.touches.length>0) attractParticles(e.touches[0].clientX,e.touches[0].clientY);
+});
 </script>
+
 </body>
 </html>
