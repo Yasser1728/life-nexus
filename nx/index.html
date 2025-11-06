@@ -26,8 +26,8 @@
     }
 
     body.light {
-      background: radial-gradient(circle at top, #f7eaff, #d4e3ff);
-      color: #202020;
+      background: radial-gradient(circle at top, #e4e1ff, #d4e3ff);
+      color: #222;
     }
 
     canvas {
@@ -52,7 +52,8 @@
     }
 
     body.light h1 {
-      background: linear-gradient(90deg, #6b3aa8, #0094ff);
+      background: none;
+      -webkit-text-fill-color: #4b0082; /* بنفسجي غامق */
       text-shadow: none;
     }
 
@@ -108,6 +109,10 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
+    body.light .btn {
+      color: #222;
+    }
+
     /* زر التبديل */
     #toggleMode {
       position: absolute;
@@ -148,12 +153,12 @@
   <h1>NX.PI</h1>
   <p>Transform Your Business with AI.</p>
 
-  <a href="start.html" class="btn start">START NOW</a>
-  <a href="consult.html" class="btn consult">AI CONSULTATION</a>
-  <a href="index.html" class="btn home">BACK TO HOME</a>
+  <button class="btn start" onclick="alert('🚀 Starting AI Engine...')">START NOW</button>
+  <button class="btn consult" onclick="alert('💬 Connecting to AI Consultant...')">AI CONSULTATION</button>
+  <button class="btn home" onclick="alert('🏠 Going Home...')">BACK TO HOME</button>
 
   <script>
-    // === نظام الجسيمات المتحركة ===
+    // === نظام الجسيمات ===
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     let particlesArray = [];
@@ -185,7 +190,7 @@
       }
       draw() {
         ctx.fillStyle = isLightMode
-          ? 'rgba(100, 100, 255, 0.5)'
+          ? 'rgba(120, 100, 255, 0.6)'
           : 'rgba(182, 126, 255, 0.6)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -239,7 +244,7 @@
     initParticles();
     animate();
 
-    // === التبديل بين الوضع الليلي والنهاري ===
+    // === التبديل بين الوضعين ===
     const toggleButton = document.getElementById('toggleMode');
     toggleButton.addEventListener('click', () => {
       document.body.classList.toggle('light');
