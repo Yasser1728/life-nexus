@@ -1,19 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Epic - Life Nexus</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epic.PI – Empower Your Vision with AI</title>
   <style>
-    body {font-family: Arial; text-align: center; padding: 50px; background: #f0f8ff; margin: 0;}
-    h1 {color: #ff4500; font-size: 2.5em;}
-    .btn {padding: 15px 30px; background: #ff4500; color: white; text-decoration: none; border-radius: 10px; display: inline-block; font-size: 18px; margin: 10px;}
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #2b0040 0%, #0d0013 100%);
+      color: #fff;
+      font-family: "Poppins", Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      color: #c77dff;
+      text-shadow: 0 0 25px #c77dff;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #d1b3ff;
+      margin-bottom: 40px;
+    }
+    .btn {
+      display: block;
+      background: rgba(199, 125, 255, 0.15);
+      color: white;
+      border: 2px solid #c77dff;
+      border-radius: 50px;
+      padding: 14px 30px;
+      margin: 10px 0;
+      width: 220px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 25px rgba(199, 125, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: #c77dff;
+      color: #000;
+      box-shadow: 0 0 40px #c77dff;
+      transform: scale(1.05);
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(199, 125, 255, 0.3);
+      animation: float 10s infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-50px); opacity: 0.4; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <h1>epic.life.pi</h1>
-  <p>عالم الألعاب والمكافآت في Life Nexus!</p>
-  <button onclick="alert('تم إرسال 1 Pi إلى محفظتك!')">اربح مكافأة Pi</button>
-  <br><br>
-  <a href="/life-nexus/" class="btn">العودة للرئيسية</a>
+  <h1>Epic.PI</h1>
+  <p>Empower Your Vision with AI</p>
+
+  <a href="#" class="btn" onclick="alert('Welcome to the Epic AI Era!')">GET STARTED</a>
+  <a href="#" class="btn" onclick="alert('AI Solutions Coming Soon!')">AI SOLUTIONS</a>
+  <a href="https://yasser1728.github.io/life-nexus/" class="btn">BACK TO HOME</a>
+
+  <script>
+    // Create floating particles
+    for (let i = 0; i < 35; i++) {
+      let p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.width = p.style.height = Math.random() * 6 + 'px';
+      p.style.top = Math.random() * 100 + '%';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = Math.random() * 10 + 5 + 's';
+      document.body.appendChild(p);
+    }
+  </script>
 </body>
 </html>
