@@ -3,19 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Analytics.PI – Empowering Data Intelligence with AI. Advanced analytics and AI consultation platform." />
+  <meta name="keywords" content="AI, Analytics, Data Intelligence, Machine Learning, AI Consultation" />
+  <meta name="author" content="Analytics.PI Team" />
+  <meta name="theme-color" content="#3b0a66" />
   <title>Analytics.PI – Empowering Data Intelligence with AI</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --primary-gradient: linear-gradient(90deg, #b67eff, #61d7ff);
+      --dark-bg: radial-gradient(circle at top, #3b0a66, #1a042e);
+      --light-bg: radial-gradient(circle at top, #e4e1ff, #d4e3ff);
+      --btn-glow-start: 0 0 15px rgba(164, 92, 255, 0.4);
+      --btn-glow-consult: 0 0 20px rgba(0, 255, 231, 0.5);
+    }
+
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-      transition: background 0.5s, color 0.5s;
     }
 
     html, body {
-      margin: 0;
-      padding: 0;
       height: 100%;
       overflow: hidden;
+      touch-action: pan-y;
     }
 
     body {
@@ -23,14 +39,15 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #e0e0e0;
       text-align: center;
+      color: #e0e0e0;
+      background: var(--dark-bg);
+      transition: background 0.6s ease, color 0.6s ease;
       position: relative;
-      background: radial-gradient(circle at top, #3b0a66, #1a042e);
     }
 
     body.light {
-      background: radial-gradient(circle at top, #e4e1ff, #d4e3ff);
+      background: var(--light-bg);
       color: #222;
     }
 
@@ -38,23 +55,28 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       z-index: 0;
+      pointer-events: none;
     }
 
-    h1, p, .btn, #toggleMode {
+    .container {
       position: relative;
       z-index: 1;
+      max-width: 90%;
+      padding: 20px;
     }
 
     h1 {
-      font-size: 2.8rem;
-      background: linear-gradient(90deg, #b67eff, #61d7ff);
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
       text-shadow: 0 0 20px rgba(182, 126, 255, 0.6);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      font-weight: 700;
     }
 
     body.light h1 {
@@ -64,55 +86,85 @@
     }
 
     p {
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
       opacity: 0.85;
       margin-bottom: 40px;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
     }
 
     .btn {
-      display: block;
-      width: 220px;
-      padding: 14px 0;
-      margin: 12px 0;
+      width: 240px;
+      max-width: 90%;
+      padding: 15px 0;
       border: 2px solid transparent;
-      border-radius: 30px;
+      border-radius: 50px;
       font-weight: 600;
-      letter-spacing: 0.5px;
       font-size: 1rem;
-      transition: 0.3s;
+      letter-spacing: 0.6px;
       text-decoration: none;
       color: #fff;
+      background: transparent;
       cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.6s;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 100%;
     }
 
     .btn.start {
-      background: transparent;
       border-color: #a45cff;
-      box-shadow: 0 0 15px rgba(164, 92, 255, 0.4);
+      box-shadow: var(--btn-glow-start);
     }
 
     .btn.start:hover {
-      background: rgba(164, 92, 255, 0.2);
+      background: rgba(164, 92, 255, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(164, 92, 255, 0.6);
     }
 
     .btn.consult {
-      background: transparent;
       border-color: #00ffe7;
-      box-shadow: 0 0 20px rgba(0, 255, 231, 0.5);
+      box-shadow: var(--btn-glow-consult);
     }
 
     .btn.consult:hover {
-      background: rgba(0, 255, 231, 0.15);
+      background: rgba(0, 255, 231, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(0, 255, 231, 0.7);
     }
 
     .btn.home {
-      background: transparent;
-      border-color: #999;
+      border-color: #aaa;
       box-shadow: 0 0 12px rgba(160, 160, 160, 0.3);
     }
 
     .btn.home:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
     }
 
     body.light .btn {
@@ -122,21 +174,26 @@
     #toggleMode {
       position: absolute;
       top: 20px;
-      right: 25px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.4);
+      right: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       color: #fff;
-      padding: 8px 18px;
-      border-radius: 25px;
+      padding: 10px 20px;
+      border-radius: 30px;
       cursor: pointer;
       font-weight: 500;
       font-size: 0.9rem;
-      transition: 0.3s;
+      transition: all 0.3s ease;
       z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     #toggleMode:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
     }
 
     body.light #toggleMode {
@@ -146,7 +203,50 @@
     }
 
     body.light #toggleMode:hover {
-      background: rgba(0, 0, 0, 0.15);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-10px);
+    }
+
+    @media (max-width: 480px) {
+      .btn-group {
+        gap: 12px;
+      }
+      .btn {
+        width: 100%;
+        font-size: 0.95rem;
+      }
+      #toggleMode {
+        top: 15px;
+        right: 15px;
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
@@ -155,51 +255,93 @@
 
   <button id="toggleMode">🌙 Night</button>
 
-  <h1>Analytics.PI</h1>
-  <p>Empowering Data Intelligence with AI.</p>
+  <div class="container">
+    <h1>Analytics.PI</h1>
+    <p>Empowering Data Intelligence with AI. Unlock insights, automate decisions, and scale smarter.</p>
 
-  <button class="btn start" onclick="alert('📊 Launching Analytics AI System...')">START NOW</button>
-  <button class="btn consult" onclick="alert('🤖 Connecting to AI Data Consultant...')">AI CONSULTATION</button>
-  <button class="btn home" onclick="goHome()">BACK TO HOME</button>
+    <div class="btn-group">
+      <button class="btn start" id="startBtn">START NOW</button>
+      <button class="btn consult" id="consultBtn">AI CONSULTATION</button>
+      <a href="https://yasser1728.github.io/life-nexus/" class="btn home" target="_blank" rel="noopener">BACK TO HOME</a>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
 
   <script>
-    // === نظام الجسيمات ===
+    // === نظام الجسيمات المتقدم ===
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     let particlesArray = [];
-    const numParticles = 80;
+    const numParticles = window.innerWidth < 768 ? 50 : 80;
+    let mouse = { x: null, y: null, radius: 120 };
     let isLightMode = false;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // تحسين الأداء: استخدام offscreen canvas للخطوط
+    const lineCanvas = document.createElement('canvas');
+    const lineCtx = lineCanvas.getContext('2d');
 
-    window.addEventListener('resize', () => {
+    function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      lineCanvas.width = canvas.width;
+      lineCanvas.height = canvas.height;
       initParticles();
+    }
+
+    window.addEventListener('resize', debounce(resizeCanvas, 200));
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
     });
 
+    window.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      mouse.x = touch.clientX;
+      mouse.y = touch.clientY;
+    }, { passive: true });
+
     class Particle {
-      constructor(x, y, size, speedX, speedY) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.speedX = speedX;
-        this.speedY = speedY;
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.size = Math.random() * 2.5 + 1;
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.speedX = (Math.random() - 0.5) * 1.2;
+        this.speedY = (Math.random() - 0.5) * 1.2;
+        this.baseSpeedX = this.speedX;
+        this.baseSpeedY = this.speedY;
       }
       update() {
+        // تفاعل مع المؤشر
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const force = mouse.radius / (distance * distance);
+
+        if (distance < mouse.radius) {
+          this.speedX = this.baseSpeedX + dx * force * 0.08;
+          this.speedY = this.baseSpeedY + dy * force * 0.08;
+        } else {
+          this.speedX += (this.baseSpeedX - this.speedX) * 0.05;
+          this.speedY += (this.baseSpeedY - this.speedY) * 0.05;
+        }
+
         this.x += this.speedX;
         this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+        // إعادة الوضع عند الخروج
+        if (this.x < 0 || this.x > canvas.width) this.reset();
+        if (this.y < 0 || this.y > canvas.height) this.reset();
       }
       draw() {
         ctx.fillStyle = isLightMode
-          ? 'rgba(120, 100, 255, 0.6)'
-          : 'rgba(182, 126, 255, 0.6)';
+          ? 'rgba(120, 100, 255, 0.7)'
+          : 'rgba(182, 126, 255, 0.7)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
         ctx.fill();
       }
     }
@@ -207,60 +349,86 @@
     function initParticles() {
       particlesArray = [];
       for (let i = 0; i < numParticles; i++) {
-        const size = Math.random() * 2 + 1;
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const speedX = (Math.random() - 0.5) * 0.8;
-        const speedY = (Math.random() - 0.5) * 0.8;
-        particlesArray.push(new Particle(x, y, size, speedX, speedY));
+        particlesArray.push(new Particle());
       }
     }
 
     function connectParticles() {
+      lineCtx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
+      lineCtx.strokeStyle = isLightMode ? 'rgba(0,0,0,0.08)' : 'rgba(97, 215, 255, 0.12)';
+      lineCtx.lineWidth = 1;
+
       for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-          let dx = particlesArray[a].x - particlesArray[b].x;
-          let dy = particlesArray[a].y - particlesArray[b].y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 100) {
-            ctx.strokeStyle = isLightMode
-              ? 'rgba(0,0,0,0.08)'
-              : 'rgba(97, 215, 255, 0.1)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-            ctx.stroke();
+        for (let b = a + 1; b < particlesArray.length; b++) {
+          const dx = particlesArray[a].x - particlesArray[b].x;
+          const dy = particlesArray[a].y - particlesArray[b].y;
+          const distance = dx * dx + dy * dy;
+
+          if (distance < 10000) { // 100^2
+            const opacity = (1 - Math.sqrt(distance) / 100) * 0.3;
+            lineCtx.globalAlpha = opacity;
+            lineCtx.beginPath();
+            lineCtx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            lineCtx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            lineCtx.stroke();
           }
         }
       }
+      lineCtx.globalAlpha = 1;
+      ctx.drawImage(lineCanvas, 0, 0);
     }
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let particle of particlesArray) {
-        particle.update();
-        particle.draw();
-      }
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
       connectParticles();
       requestAnimationFrame(animate);
     }
 
-    initParticles();
-    animate();
+    // === تحسين الأداء: Debounce ===
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
 
     // === الوضع الليلي والنهاري ===
     const toggleButton = document.getElementById('toggleMode');
     toggleButton.addEventListener('click', () => {
       document.body.classList.toggle('light');
       isLightMode = document.body.classList.contains('light');
-      toggleButton.textContent = isLightMode ? '🌞 Day' : '🌙 Night';
+      toggleButton.innerHTML = isLightMode ? '🌞 Day' : '🌙 Night';
+      initParticles(); // إعادة تهيئة الألوان
     });
 
-    // === زر العودة للصفحة الرئيسية ===
-    function goHome() {
-      window.location.href = "https://yasser1728.github.io/life-nexus/";
+    // === إشعارات مخصصة (بدل alert) ===
+    const toast = document.getElementById('toast');
+    function showToast(message, duration = 3000) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), duration);
     }
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      showToast('Launching Analytics AI System...', 2500);
+    });
+
+    document.getElementById('consultBtn').addEventListener('click', () => {
+      showToast('Connecting to AI Data Consultant...', 2500);
+    });
+
+    // === بدء النظام ===
+    resizeCanvas();
+    animate();
   </script>
 </body>
 </html>
