@@ -15,29 +15,29 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at center, #2b0040 0%, #0d0013 100%);
+      background: radial-gradient(circle at center, #1a001f 0%, #000 100%);
       color: #fff;
       font-family: "Poppins", Arial, sans-serif;
       text-align: center;
       overflow: hidden;
+      transition: background 0.5s ease;
     }
     h1 {
-      color: #c77dff;
-      text-shadow: 0 0 25px #c77dff;
-      font-size: 3rem;
-      letter-spacing: 2px;
+      color: #bb86fc;
+      text-shadow: 0 0 20px #bb86fc;
+      font-size: 2.8rem;
       margin-bottom: 15px;
     }
     p {
       font-size: 1.2rem;
-      color: #d1b3ff;
+      color: #ccc;
       margin-bottom: 40px;
     }
     .btn {
       display: block;
-      background: rgba(199, 125, 255, 0.15);
+      background: rgba(187, 134, 252, 0.2);
       color: white;
-      border: 2px solid #c77dff;
+      border: 2px solid #bb86fc;
       border-radius: 50px;
       padding: 14px 30px;
       margin: 10px 0;
@@ -45,39 +45,95 @@
       font-size: 1.1rem;
       font-weight: bold;
       text-decoration: none;
-      box-shadow: 0 0 25px rgba(199, 125, 255, 0.5);
+      box-shadow: 0 0 25px rgba(187, 134, 252, 0.5);
       transition: all 0.3s ease;
     }
     .btn:hover {
-      background: #c77dff;
+      background: #bb86fc;
       color: #000;
-      box-shadow: 0 0 40px #c77dff;
+      box-shadow: 0 0 40px #bb86fc;
       transform: scale(1.05);
     }
+    .toggle-mode {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #bb86fc;
+      color: #000;
+      border: none;
+      border-radius: 30px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      box-shadow: 0 0 15px #bb86fc;
+      transition: 0.3s;
+    }
+    .toggle-mode:hover {
+      background: #d0a6ff;
+    }
+
+    /* Light Mode */
+    body.light {
+      background: linear-gradient(145deg, #ffffff, #dcd0ff);
+      color: #000;
+    }
+    body.light .btn {
+      border-color: #7b2ff7;
+      color: #000;
+      box-shadow: 0 0 25px rgba(123, 47, 247, 0.3);
+    }
+    body.light .btn:hover {
+      background: #7b2ff7;
+      color: #fff;
+    }
+    body.light .toggle-mode {
+      background: #7b2ff7;
+      color: #fff;
+      box-shadow: 0 0 15px #7b2ff7;
+    }
+
+    /* Floating glow particles */
     .particle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(199, 125, 255, 0.3);
+      background: rgba(187, 134, 252, 0.3);
       animation: float 10s infinite;
     }
     @keyframes float {
-      0% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(-50px); opacity: 0.4; }
-      100% { transform: translateY(0); opacity: 1; }
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-50px);
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
+  <button class="toggle-mode" onclick="toggleMode()">Dark / Light ☾</button>
+
   <h1>Epic.PI</h1>
   <p>Empower Your Vision with AI</p>
 
-  <a href="#" class="btn" onclick="alert('Welcome to the Epic AI Era!')">GET STARTED</a>
-  <a href="#" class="btn" onclick="alert('AI Solutions Coming Soon!')">AI SOLUTIONS</a>
+  <a href="#" class="btn" onclick="alert('Epic AI Journey Begins!')">START NOW</a>
+  <a href="#" class="btn" onclick="alert('AI Empowerment Coming Soon!')">AI CONSULTATION</a>
   <a href="https://yasser1728.github.io/life-nexus/" class="btn">BACK TO HOME</a>
 
   <script>
-    // Create floating particles
-    for (let i = 0; i < 35; i++) {
+    // Toggle dark/light mode
+    function toggleMode() {
+      document.body.classList.toggle('light');
+    }
+
+    // Generate floating particles
+    for (let i = 0; i < 30; i++) {
       let p = document.createElement('div');
       p.classList.add('particle');
       p.style.width = p.style.height = Math.random() * 6 + 'px';
