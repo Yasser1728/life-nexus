@@ -1,65 +1,194 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecommerce.Pi - متجر ذكي</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecommerce.PI – Empowering Digital Commerce with AI</title>
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
     body {
-      background: #000;
-      color: #0f0;
-      font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
-      padding: 20px;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      font-size: 1.2rem;
+      align-items: center;
+      background-color: #2b004f;
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+      transition: background-color 0.6s, color 0.6s;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
     h1 {
-      color: #0f0;
-      text-shadow: 0 0 15px #0f0;
-      font-size: 2.5rem;
-      margin: 10px 0;
+      font-size: 3.5rem;
+      letter-spacing: 3px;
+      background: linear-gradient(90deg, #b678ff, #e0b3ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      z-index: 1;
+      text-align: center;
     }
     p {
-      font-size: 1.5rem;
-      margin: 15px 0;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      z-index: 1;
+      opacity: 0.9;
     }
-    .btn {
-      background: #0f0;
-      color: black;
-      padding: 15px 25px;
-      margin: 10px auto;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: bold;
-      font-size: 1.5rem;
-      display: block;
-      width: 80%;
-      max-width: 300px;
-      transition: 0.3s;
+    .buttons {
+      z-index: 1;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .btn:hover {
-      background: #0f8;
+    button {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #b678ff;
+      border-color: #b678ff;
       transform: scale(1.05);
     }
-    @media (max-width: 480px) {
-      h1 { font-size: 2rem; }
-      p { font-size: 1.3rem; }
-      .btn { font-size: 1.3rem; padding: 12px 20px; }
+    .toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .light-mode {
+      background-color: #f9f9ff;
+      color: #222;
+    }
+    .light-mode h1 {
+      background: linear-gradient(90deg, #6b00b3, #9c4fff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .light-mode button {
+      background: rgba(0, 0, 0, 0.05);
+      color: #333;
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+    .light-mode button:hover {
+      background: #9c4fff;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <h1>ECOMMERCE.PI</h1>
-  <p>متجرك الذكي في كون الـ .pi</p>
-  
-  <a href="#" class="btn" onclick="alert('🔥 قريباً: منتجات AI مولدة!')">تصفح المنتجات</a>
-  <a href="../nexus/index.html" class="btn">ربط بالـ AI (Nexus)</a>
-  <a href="../index.html" class="btn">رجوع للرئيسية</a>
+  <canvas id="particles"></canvas>
+  <button class="toggle" onclick="toggleMode()">🌙 Night</button>
+  <h1># Ecommerce.PI</h1>
+  <p>Empowering Digital Commerce with AI.</p>
+  <div class="buttons">
+    <button onclick="alert('Launching AI Tools...')">START NOW</button>
+    <button onclick="alert('Connecting to AI Consultation...')">AI CONSULTATION</button>
+    <button onclick="goHome()">BACK TO HOME</button>
+  </div>
+
+  <script>
+    // Particles Background
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particlesArray;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ["#b678ff", "#d9aaff", "#8a4fff", "#c69aff"];
+
+    const maxSize = 3;
+    const minSize = 1;
+    const numParticles = 100;
+
+    function Particle(x, y, directionX, directionY, size, color) {
+      this.x = x;
+      this.y = y;
+      this.directionX = directionX;
+      this.directionY = directionY;
+      this.size = size;
+      this.color = color;
+    }
+
+    Particle.prototype.draw = function() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    };
+
+    Particle.prototype.update = function() {
+      if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+        this.directionX = -this.directionX;
+      }
+      if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+        this.directionY = -this.directionY;
+      }
+      this.x += this.directionX;
+      this.y += this.directionY;
+      this.draw();
+    };
+
+    function init() {
+      particlesArray = [];
+      for (let i = 0; i < numParticles; i++) {
+        let size = Math.random() * (maxSize - minSize) + minSize;
+        let x = Math.random() * (window.innerWidth - size * 2);
+        let y = Math.random() * (window.innerHeight - size * 2);
+        let directionX = (Math.random() * 0.4) - 0.2;
+        let directionY = (Math.random() * 0.4) - 0.2;
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+      }
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+      const toggleButton = document.querySelector(".toggle");
+      toggleButton.textContent = document.body.classList.contains("light-mode") ? "☀️ Day" : "🌙 Night";
+    }
+
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
+    init();
+    animate();
+
+    window.addEventListener("resize", function() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      init();
+    });
+  </script>
 </body>
 </html>
