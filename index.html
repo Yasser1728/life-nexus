@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -6,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Life Nexus Technology</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
+  
+  <script src="https://sdk.mine.pi/pi-sdk.js"></script>
   <style>
     /* ====== General Settings ====== */
     *{box-sizing:border-box;margin:0;padding:0;}
@@ -70,6 +71,11 @@
     .btn:hover{
       transform:scale(1.05);
       box-shadow:0 0 15px #a53cff;
+    }
+    
+    /* ====== Pi Login Button Style (New) ====== */
+    .pi-btn{
+      background:linear-gradient(90deg, #2a76f7, #007bff); /* لون أزرق لزر Pi */
     }
 
     /* ====== Domains (Grid Cards + Neon Glow) ====== */
@@ -186,6 +192,7 @@
     <div class="dynamic-text" id="dynamicText">Intelligence</div>
     <p>Intelligence, Technology, Finance, and Innovation in One Ecosystem</p>
     <a href="#domains" class="btn">Our Projects</a>
+    <a href="#" id="piLoginBtn" class="btn pi-btn">Login with Pi</a>
     <a href="#contact" class="btn">Contact Us</a>
   </header>
 
@@ -229,71 +236,110 @@
   </footer>
 
   <script>
-    // ====== Dynamic Text ======
-    const words = ["Intelligence","Innovation","Finance","Technology","Connection","Elite","Life Nexus"];
-    let i = 0;
-    const dynamicText = document.getElementById("dynamicText");
-    setInterval(() => {
-      dynamicText.textContent = words[i];
-      i = (i + 1) % words.length;
-    }, 2000);
+    
+    // === [تعديل Pi #3: كود Pi SDK للمصادقة] ===
+    window.onload = function() {
+        // 1. تهيئة Pi SDK
+        Pi.init({ version: "2.0", sandbox: false }); // sandbox: false يعني استخدام الشبكة الرئيسية
 
-    // ====== Scroll Reveal ======
-    function revealOnScroll() {
-      const elements = document.querySelectorAll('.domains, .contact, footer');
-      const windowBottom = window.innerHeight + window.scrollY;
-      elements.forEach(el => {
-        if (el.offsetTop < windowBottom - 50) {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-          el.style.transition = 'opacity 1s ease, transform 1s ease';
+        const piLoginBtn = document.getElementById('piLoginBtn');
+        
+        // 2. دالة التعامل مع الدفعات غير المكتملة (مطلوبة من Pi SDK)
+        function onIncompletePaymentFound(payment) {
+            console.warn('Incomplete payment found:', payment);
         }
-      });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
 
-    // ====== Canvas Particles ======
-    const canvas = document.getElementById('bg');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const particles = [];
-    for (let j = 0; j < 80; j++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 1,
-        dx: (Math.random() - 0.5) * 0.5,
-        dy: (Math.random() - 0.5) * 0.5
-      });
-    }
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(165,60,255,0.6)";
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-        p.x += p.dx;
-        p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
+        // 3. دالة تسجيل الدخول عند الضغط على الزر
+        piLoginBtn.addEventListener('click', () => {
+            Pi.authenticate(['username'], onIncompletePaymentFound) // طلب اسم المستخدم فقط
+            .then(function(auth) {
+                // النجاح في تسجيل الدخول
+                alert(`Welcome back, ${auth.user.username}!`);
+                console.log('Authentication Success:', auth);
+                
+                // تحديث واجهة المستخدم
+                piLoginBtn.textContent = `Hello, ${auth.user.username}`;
+                piLoginBtn.style.pointerEvents = 'none'; // تعطيل الزر بعد الدخول
 
-    // ====== Dark/Light Mode Switch ======
-    const themeSwitch = document.getElementById('themeSwitch');
-    themeSwitch.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      document.body.classList.toggle('light');
-    });
+                // في تطبيق حقيقي، يجب إرسال بيانات المستخدم (auth.user) إلى خادمك الخلفي!
+
+            })
+            .catch(function(error) {
+                // فشل تسجيل الدخول
+                console.error('Authentication Failed:', error);
+                alert('Login failed. Please try again.');
+            });
+        });
+        
+        // === نهاية كود Pi SDK ===
+        
+        
+        // ====== Dynamic Text ======
+        const words = ["Intelligence","Innovation","Finance","Technology","Connection","Elite","Life Nexus"];
+        let i = 0;
+        const dynamicText = document.getElementById("dynamicText");
+        setInterval(() => {
+          dynamicText.textContent = words[i];
+          i = (i + 1) % words.length;
+        }, 2000);
+
+        // ====== Scroll Reveal ======
+        function revealOnScroll() {
+          const elements = document.querySelectorAll('.domains, .contact, footer');
+          const windowBottom = window.innerHeight + window.scrollY;
+          elements.forEach(el => {
+            if (el.offsetTop < windowBottom - 50) {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+              el.style.transition = 'opacity 1s ease, transform 1s ease';
+            }
+          });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ====== Canvas Particles ======
+        const canvas = document.getElementById('bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        for (let j = 0; j < 80; j++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 2 + 1,
+            dx: (Math.random() - 0.5) * 0.5,
+            dy: (Math.random() - 0.5) * 0.5
+          });
+        }
+        function animateParticles() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "rgba(165,60,255,0.6)";
+          particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+          });
+          requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        window.addEventListener('resize', () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+
+        // ====== Dark/Light Mode Switch ======
+        const themeSwitch = document.getElementById('themeSwitch');
+        themeSwitch.addEventListener('click', () => {
+          document.body.classList.toggle('dark');
+          document.body.classList.toggle('light');
+        });
+    }; // نهاية window.onload
   </script>
 </body>
 </html>
