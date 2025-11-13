@@ -76,7 +76,7 @@
     
     /* ====== Pi Login Button Style (New) ====== */
     .pi-btn{
-      background:linear-gradient(90deg, #2a76f7, #007bff); /* لون أزرق لزر Pi */
+      background:linear-gradient(90deg, #2a76f7, #007bff); /* Blue color for Pi button */
     }
 
     /* ====== Domains (Grid Cards + Neon Glow) ====== */
@@ -195,6 +195,9 @@
     <a href="#domains" class="btn">Our Projects</a>
     
     <a href="#" id="piLoginBtn" class="btn pi-btn">Login with Pi</a>
+    
+    <a href="#" id="piPaymentBtn" class="btn pi-btn" style="margin-top: 10px;">Test Pi Payment</a>
+    
     <a href="#contact" class="btn">Contact Us</a>
   </header>
 
@@ -240,18 +243,20 @@
   <script>
     
     // =======================================
-    // [كود Pi SDK للمصادقة - تم تصحيحه هنا]
+    // [Pi SDK Authentication & Payment Code]
     // =======================================
     if (typeof Pi !== 'undefined') {
         // 🟢 2. تم إضافة App ID و sandbox: true للعمل على Testnet
         Pi.init({ version: "2.0", sandbox: true, app_id: "z-4f622fa3756f5cea" }); 
 
         const piLoginBtn = document.getElementById('piLoginBtn');
+        const piPaymentBtn = document.getElementById('piPaymentBtn'); // 🟢 جلب الزر الجديد
         
         function onIncompletePaymentFound(payment) {
             console.warn('Incomplete payment found:', payment);
         }
 
+        // 1. وظيفة المصادقة (Authentication)
         piLoginBtn.addEventListener('click', () => {
             Pi.authenticate(['username'], onIncompletePaymentFound) 
             .then(function(auth) {
@@ -264,6 +269,36 @@
                 alert('Login failed. Please try again.');
             });
         });
+
+        // 2. وظيفة الدفع التجريبي (Payment)
+        piPaymentBtn.addEventListener('click', () => {
+            
+            // ⚠️ هام: يجب تغيير هذا العنوان إلى 10 محافظ Testnet مختلفة في كل مرة
+            const recipientAddress = "GAQ6M...4TGB"; // مثال: يجب استبداله بعناوين Testnet حقيقية
+            
+            Pi.createPayment({
+                amount: 0.01, // مبلغ صغير للتجربة
+                memo: "Life Nexus Test Transaction for Listing", 
+                metadata: { type: "test_listing_requirement" },
+                destinationAddress: recipientAddress,
+            }, {
+                onReadyForServerApproval: function(paymentId) {
+                    alert('Payment started. Please approve in your Pi Wallet.');
+                },
+                onReadyForServerCompletion: function(paymentId, txid) {
+                    alert('Payment confirmed! TXID: ' + txid + '. This transaction counts towards the 10 required.');
+                },
+                onCancel: function(paymentId) {
+                    alert('Payment cancelled.');
+                },
+                onError: function(error, payment) {
+                    console.error('Payment error:', error);
+                    alert('Payment error: ' + error);
+                }
+            });
+        });
+
+
     } else {
         console.warn("Pi SDK is not loaded. Login button may not function.");
     }
