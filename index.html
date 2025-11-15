@@ -32,14 +32,14 @@
       text-align:center;padding:100px 20px;position:relative;
     }
     .logo{
-      font-size:2.5rem;font-weight:700;color:#ffd700;
-      text-shadow:0 0 15px rgba(255,215,0,0.6);
+      font-size:2.5rem;font-weight:700;color:#a53cff;
+      text-shadow:0 0 15px rgba(165,60,255,0.6);
       margin-bottom:20px;
       animation:fadeInDown 1s ease forwards;
     }
     h1{
       font-size:2.8rem;color:inherit;margin-bottom:10px;
-      text-shadow:0 0 15px rgba(255,215,0,0.7);
+      text-shadow:0 0 15px rgba(165,60,255,0.7);
       animation:fadeInDown 1.2s ease forwards;
     }
     p{
@@ -50,7 +50,7 @@
     /* ====== Dynamic Text ====== */
     .dynamic-text{
       font-size:1.6rem;font-weight:700;color:#fff;
-      text-shadow:0 0 10px #ffd700,0 0 20px #ffcc00,0 0 30px #e6b800;
+      text-shadow:0 0 10px #a53cff,0 0 20px #b86bff,0 0 30px #9333ea;
       margin-bottom:30px;
       animation:fadeIn 1.5s ease forwards;
       min-height:40px;
@@ -60,8 +60,8 @@
     /* ====== Buttons ====== */
     .btn{
       display:inline-block;
-      background:linear-gradient(90deg,#ffd700,#ffcc00);
-      color:#000;
+      background:linear-gradient(90deg,#a53cff,#6a00ff);
+      color:#fff;
       padding:12px 35px;
       margin:6px;
       border-radius:40px;
@@ -71,7 +71,7 @@
     }
     .btn:hover{
       transform:scale(1.05);
-      box-shadow:0 0 15px #ffd700;
+      box-shadow:0 0 15px #a53cff;
     }
     
     /* ====== Pi Login Button Style ====== */
@@ -90,24 +90,24 @@
     }
     .card{
       background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,215,0,0.3);
+      border:1px solid rgba(165,60,255,0.3);
       padding:15px;
       border-radius:15px;
       text-align:center;
       font-weight:600;
       color:inherit;
       transition:all 0.3s ease;
-      box-shadow:0 0 5px rgba(255,215,0,0.2);
+      box-shadow:0 0 5px rgba(165,60,255,0.2);
     }
     .card:hover{
-      background:rgba(255,215,0,0.15);
+      background:rgba(165,60,255,0.15);
       transform:translateY(-5px);
-      box-shadow:0 0 20px #ffd700,0 0 40px #ffcc00,0 0 60px #e6b800;
+      box-shadow:0 0 20px #a53cff,0 0 40px #b86bff,0 0 60px #9333ea;
       animation:neonBlink 1.5s infinite alternate;
     }
     @keyframes neonBlink{
-      0%{box-shadow:0 0 10px #ffd700,0 0 20px #ffcc00,0 0 30px #e6b800;}
-      100%{box-shadow:0 0 20px #ffd700,0 0 40px #ffcc00,0 0 60px #e6b800;}
+      0%{box-shadow:0 0 10px #a53cff,0 0 20px #b86bff,0 0 30px #9333ea;}
+      100%{box-shadow:0 0 20px #a53cff,0 0 40px #b86bff,0 0 60px #9333ea;}
     }
 
     /* ====== Contact Section ====== */
@@ -123,14 +123,14 @@
       background:linear-gradient(180deg,#e0e0e0,#f0f0f0);
     }
     .contact h2{
-      color:#ffd700;
+      color:#a53cff;
       margin-bottom:10px;
-      text-shadow:0 0 10px #ffd700;
+      text-shadow:0 0 10px #a53cff;
     }
     .contact p{margin-bottom:15px;}
     .call-btn{
-      background:linear-gradient(90deg,#cc9900,#ffcc00);
-      color:#000;
+      background:linear-gradient(90deg,#6a0dad,#9b30ff);
+      color:#fff;
       padding:12px 28px;
       border-radius:30px;
       font-weight:700;
@@ -139,7 +139,7 @@
     }
     .call-btn:hover{
       transform:scale(1.05);
-      box-shadow:0 0 15px #ffd700;
+      box-shadow:0 0 15px #a53cff;
     }
     .phone-number{
       margin-top:6px;
@@ -154,7 +154,7 @@
       opacity:0;
       transform:translateY(20px);
       transition:color 0.5s;
-      border-color:rgba(255,215,0,0.2);
+      border-color:rgba(165,60,255,0.2);
     }
 
     /* ====== Animations ====== */
@@ -166,8 +166,8 @@
       position:fixed;
       top:20px;
       left:20px;
-      background:#ffd700;
-      color:#000;
+      background:#a53cff;
+      color:#fff;
       padding:10px 18px;
       border-radius:30px;
       font-weight:700;
@@ -176,7 +176,7 @@
       z-index:100;
     }
     .theme-switch:hover{
-      box-shadow:0 0 15px #ffd700;
+      box-shadow:0 0 15px #b86bff;
       transform:scale(1.05);
     }
   </style>
@@ -338,7 +338,7 @@
     }
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(255,215,0,0.6)";
+      ctx.fillStyle = "rgba(165,60,255,0.6)";
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
