@@ -10,22 +10,21 @@
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Cairo',sans-serif;background:#0a0e2b;color:#fff;overflow-x:hidden;}
     canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.7;}
-    header{text-align:center;padding:130px 20px 90px;}
-    .logo-tec{font-size:6.8rem;font-weight:900;background:linear-gradient(90deg,#00ff9d,#00c6ff,#0072ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 50px rgba(0,198,255,0.6);letter-spacing:12px;}
-    .dynamic-text{font-size:2.5rem;font-weight:900;background:linear-gradient(90deg,#00ff9d,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:30px 0;min-height:70px;}
-    .btn{display:inline-block;background:linear-gradient(90deg,#0072ff,#00c6ff);color:#fff;padding:15px 45px;margin:10px;border-radius:50px;font-weight:700;box-shadow:0 8px 30px rgba(0,114,255,0.5);transition:.4s;}
-    .btn:hover{transform:translateY(-6px);box-shadow:0 20px 45px rgba(0,114,255,0.7);}
+    header{text-align:center;padding:100px 15px 60px;}
+    .logo-tec{font-size:16vw;font-weight:900;background:linear-gradient(90deg,#00ff9d,#00c6ff,#0072ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px rgba(0,198,255,0.6);letter-spacing:8px;}
+    .dynamic-text{font-size:7vw;font-weight:900;background:linear-gradient(90deg,#00ff9d,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:25px 0;}
+    .btn{display:inline-block;background:linear-gradient(90deg,#0072ff,#00c6ff);color:#fff;padding:14px 40px;margin:8px;border-radius:50px;font-weight:700;}
     .pi-btn{background:linear-gradient(90deg,#ff8c00,#ff5e00);}
-    .categories{max-width:1400px;margin:90px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;}
-    .cat{background:rgba(0,198,255,0.15);border:2px solid rgba(0,198,255,0.5);border-radius:26px;overflow:hidden;transition:.5s;}
-    .cat h3{background:linear-gradient(135deg,#0072ff,#00c6ff);padding:32px;font-size:1.9rem;text-align:center;color:#fff;cursor:pointer;position:relative;}
-    .cat h3::after{content:'▼';position:absolute;right:25px;top:50%;transform:translateY(-50%);}
+    .categories{max-width:100%;margin:60px 15px;display:flex;flex-direction:column;gap:25px;}
+    .cat{background:rgba(0,198,255,0.15);border:2px solid rgba(0,198,255,0.5);border-radius:24px;overflow:hidden;transition:.5s;}
+    .cat h3{background:linear-gradient(135deg,#0072ff,#00c6ff);padding:28px;font-size:1.7rem;text-align:center;color:#fff;cursor:pointer;position:relative;}
+    .cat h3::after{content:'▼';position:absolute;right:20px;top:50%;transform:translateY(-50%);}
     .cat h3.open::after{content:'▲';}
     .subdomains{max-height:0;overflow:hidden;transition:max-height 0.8s ease;background:rgba(0,114,255,0.08);}
-    .subdomains.open{max-height:2000px;padding:30px 20px;}
-    .grid{display:flex;flex-direction:column;gap:16px;}
-    .item{background:rgba(255,255,255,0.1);padding:18px 22px;border-radius:16px;text-align:center;font-weight:700;font-size:1.1rem;transition:.4s;border:1px solid rgba(0,198,255,0.3);}
-    .item:hover{background:rgba(0,198,255,0.4);transform:translateX(10px);box-shadow:0 0 30px rgba(0,198,255,0.6);}
+    .subdomains.open{max-height:2000px;padding:25px 15px;}
+    .grid{display:flex;flex-direction:column;gap:14px;}
+    .item{background:rgba(255,255,255,0.1);padding:16px 20px;border-radius:16px;text-align:center;font-weight:700;font-size:1.1rem;transition:.4s;border:1px solid rgba(0,198,255,0.3);}
+    .item:hover{background:rgba(0,198,255,0.4);transform:translateX(8px);}
   </style>
 </head>
 <body>
@@ -36,8 +35,7 @@
     <div class="logo-tec">TEC</div>
     <h1>Titan Elite Commerce</h1>
     <div class="dynamic-text" id="dynamicText">Elite</div>
-    <p>Official Luxury Commerce & Finance Ecosystem on Pi Network</p>
-    <a href="https://tec-pi.com" class="btn">Main Site</a>
+    <a href="../" class="btn">Main Site</a>
     <a href="#" id="piLoginBtn" class="btn pi-btn">Login with Pi</a>
     <a href="#" id="piPaymentBtn" class="btn pi-btn">Test Payment</a>
   </header>
@@ -45,80 +43,67 @@
   <section class="categories">
 
     <div class="cat"><h3>Commerce & Finance</h3><div class="subdomains" id="commerce"><div class="grid">
-      <a href="https://commerce.tec-pi.com" class="item">Commerce</a>
-      <a href="https://ecommerce.tec-pi.com" class="item">Ecommerce</a>
-      <a href="https://fundx.tec-pi.com" class="item">FundX</a>
-      <a href="https://assets.tec-pi.com" class="item">Assets</a>
-      <a href="https://nbf.tec-pi.com" class="item">NBF</a>
-      <a href="https://dx.tec-pi.com" class="item">DX</a>
+      <a href="../commerce/" class="item">Commerce</a>
+      <a href="../ecommerce/" class="item">Ecommerce</a>
+      <a href="../fundx/" class="item">FundX</a>
+      <a href="../assets/" class="item">Assets</a>
+      <a href="../nbf/" class="item">NBF</a>
+      <a href="../dx/" class="item">DX</a>
     </div></div></div>
 
     <div class="cat"><h3>Lifestyle & Elite</h3><div class="subdomains" id="lifestyle"><div class="grid">
-      <a href="https://life.tec-pi.com" class="item">Life</a>
-      <a href="https://estate.tec-pi.com" class="item">Estate</a>
-      <a href="https://vip.tec-pi.com" class="item">VIP</a>
-      <a href="https://elite.tec-pi.com" class="item">Elite</a>
-      <a href="https://titan.tec-pi.com" class="item">Titan</a>
-      <a href="https://legend.tec-pi.com" class="item">Legend</a>
-      <a href="https://epic.tec-pi.com" class="item">Epic</a>
+      <a href="../life/" class="item">Life</a>
+      <a href="../estate/" class="item">Estate</a>
+      <a href="../vip/" class="item">VIP</a>
+      <a href="../elite/" class="item">Elite</a>
+      <a href="../titan/" class="item">Titan</a>
+      <a href="../legend/" class="item">Legend</a>
+      <a href="../epic/" class="item">Epic</a>
     </div></div></div>
 
     <div class="cat"><h3>Technology & Tools</h3><div class="subdomains" id="tech"><div class="grid">
-      <a href="https://analytics.tec-pi.com" class="item">Analytics</a>
-      <a href="https://explorer.tec-pi.com" class="item">Explorer</a>
-      <a href="https://alert.tec-pi.com" class="item">Alert</a>
-      <a href="https://system.tec-pi.com" class="item">System</a>
-      <a href="https://nx.tec-pi.com" class="item">NX</a>
-      <a href="https://connection.tec-pi.com" class="item">Connection</a>
-      <a href="https://tec.tec-pi.com" class="item">TEC</a>
+      <a href="../analytics/" class="item">Analytics</a>
+      <a href="../explorer/" class="item">Explorer</a>
+      <a href="../alert/" class="item">Alert</a>
+      <a href="../system/" class="item">System</a>
+      <a href="../nx/" class="item">NX</a>
+      <a href="../connection/" class="item">Connection</a>
+      <a href="../tec/" class="item">TEC</a>
     </div></div></div>
 
     <div class="cat"><h3>Network & Partners</h3><div class="subdomains" id="network"><div class="grid">
-      <a href="https://nexus.tec-pi.com" class="item">Nexus</a>
-      <a href="https://brookfield.tec-pi.com" class="item">Brookfield</a>
-      <a href="https://sab.tec-pi.com" class="item">SAB</a>
-      <a href="https://insure.tec-pi.com" class="item">Insure</a>
-      <a href="https://zone.tec-pi.com" class="item">Zone</a>
+      <a href="../nexus/" class="item">Nexus</a>
+      <a href="../brookfield/" class="item">Brookfield</a>
+      <a href="../sab/" class="item">SAB</a>
+      <a href="../insure/" class="item">Insure</a>
+      <a href="../zone/" class="item">Zone</a>
     </div></div></div>
 
   </section>
 
   <script>
-    // === الجزء السحري: يحدد الدومين ويفتح القسم تلقائياً ===
-    const hostname = window.location.hostname.toLowerCase();
-    let sectionToOpen = null;
+    const path = window.location.pathname;
+    let section = null;
 
-    if(hostname.includes('commerce') || hostname.includes('ecommerce') || hostname.includes('fundx') || hostname.includes('assets') || hostname.includes('nbf') || hostname.includes('dx')){
-      sectionToOpen = 'commerce';
-    }
-    else if(hostname.includes('life') || hostname.includes('estate') || hostname.includes('vip') || hostname.includes('elite') || hostname.includes('titan') || hostname.includes('legend') || hostname.includes('epic')){
-      sectionToOpen = 'lifestyle';
-    }
-    else if(hostname.includes('analytics') || hostname.includes('explorer') || hostname.includes('alert') || hostname.includes('system') || hostname.includes('nx') || hostname.includes('connection') || hostname.includes('tec.')){
-      sectionToOpen = 'tech';
-    }
-    else if(hostname.includes('nexus') || hostname.includes('brookfield') || hostname.includes('sab') || hostname.includes('insure') || hostname.includes('zone')){
-      sectionToOpen = 'network';
-    }
+    if (path.includes('commerce') || path.includes('ecommerce') || path.includes('fundx') || path.includes('assets') || path.includes('nbf') || path.includes('dx')) section = 'commerce';
+    else if (path.includes('life') || path.includes('estate') || path.includes('vip') || path.includes('elite') || path.includes('titan') || path.includes('legend') || path.includes('epic')) section = 'lifestyle';
+    else if (path.includes('analytics') || path.includes('explorer') || path.includes('alert') || path.includes('system') || path.includes('nx') || path.includes('connection') || path.includes('tec/')) section = 'tech';
+    else if (path.includes('nexus') || path.includes('brookfield') || path.includes('sab') || path.includes('insure') || path.includes('zone')) section = 'network';
 
-    if(sectionToOpen){
+    if (section) {
       setTimeout(() => {
-        const el = document.getElementById(sectionToOpen);
+        const el = document.getElementById(section);
         el.classList.add('open');
         el.previousElementSibling.classList.add('open');
         el.previousElementSibling.scrollIntoView({behavior: "smooth"});
-      }, 800);
+      }, 700);
     }
 
-    // فتح وإغلاق عادي
-    document.querySelectorAll('.cat h3').forEach(h => {
-      h.onclick = () => {
-        h.classList.toggle('open');
-        h.nextElementSibling.classList.toggle('open');
-      };
+    document.querySelectorAll('.cat h3').forEach(h => h.onclick = () => {
+      h.classList.toggle('open');
+      h.nextElementSibling.classList.toggle('open');
     });
 
-    // باقي الكود (particles + dynamic + Pi SDK) زي ما هو
     const words = ["Elite","Titan","Luxury","Innovation","Pi Ecosystem","Future"];
     let i = 0;
     setInterval(() => { document.getElementById("dynamicText").textContent = words[i]; i = (i + 1) % words.length; }, 1800);
@@ -126,13 +111,13 @@
     const canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
     canvas.width = innerWidth; canvas.height = innerHeight;
     window.addEventListener('resize', () => {canvas.width = innerWidth; canvas.height = innerHeight;});
-    const particles = Array.from({length:150},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2.5+1,dx:(Math.random()-0.5)*0.9,dy:(Math.random()-0.5)*0.9}));
+    const particles = Array.from({length:100},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.8,dy:(Math.random()-0.5)*0.8}));
     (function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(0,198,255,0.7)";ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});requestAnimationFrame(anim);})();
 
     if(typeof Pi !== 'undefined'){
       Pi.init({version:"2.0", sandbox:true});
-      document.getElementById('piLoginBtn').onclick = () => Pi.authenticate(['username'],()=>{}).then(a=>alert("Welcome " + a.user.username)).catch(()=>alert("Login failed"));
-      document.getElementById('piPaymentBtn').onclick = () => Pi.createPayment({amount:0.01,memo:"TEC Test Payment"},{onReadyForServerApproval:()=>alert("Open Pi Wallet"),onReadyForServerCompletion:(p,t)=>alert("Success! TXID: "+t),onCancel:()=>alert("Cancelled")});
+      document.getElementById('piLoginBtn').onclick = () => Pi.authenticate(['username'],()=>{}).then(a=>alert("Welcome " + a.user.username)).catch(()=>alert("Failed"));
+      document.getElementById('piPaymentBtn').onclick = () => Pi.createPayment({amount:0.01,memo:"TEC Test"},{onReadyForServerApproval:()=>alert("Open Wallet"),onReadyForServerCompletion:(p,t)=>alert("Paid! "+t),onCancel:()=>alert("Cancelled")});
     }
   </script>
 </body>
