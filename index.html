@@ -27,58 +27,41 @@
     .item{background:rgba(255,255,255,0.1);padding:18px 22px;border-radius:16px;text-align:center;font-weight:700;font-size:1.1rem;transition:.4s;border:1px solid rgba(0,198,255,0.3);}
     .item:hover{background:rgba(0,198,255,0.4);transform:translateX(10px);box-shadow:0 0 30px rgba(0,198,255,0.6);}
     
-    /* ⭐ NEW – Light Mode Styles */
-    body.light-mode {
-      background: #f5f7ff;
-      color: #000;
+    body.light-mode { background: #f5f7ff; color: #000;}
+    body.light-mode header .logo-tec { text-shadow: none;}
+    body.light-mode .cat { background: rgba(0, 100, 255, 0.08); border-color: rgba(0, 100, 255, 0.4);}
+    body.light-mode .item { background: rgba(0, 0, 0, 0.06); border-color: rgba(0, 100, 255, 0.3); color: #000;}
+    body.light-mode .item:hover { background: rgba(0, 100, 255, 0.3); color: #fff;}
+    body.light-mode h1, body.light-mode h3 { color: #000;}
+    
+    #themeToggle { position: fixed; top: 25px; left: 25px; background: linear-gradient(90deg, #00ff9d, #00c6ff); border: none; padding: 12px 25px; border-radius: 40px; color: #000; font-weight: 800; cursor: pointer; z-index: 999; box-shadow: 0 0 15px rgba(0,198,255,0.6); transition: .3s;}
+    #themeToggle:hover { transform: scale(1.08);}
+
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+      header { padding: 90px 15px 60px; }
+      .logo-tec { font-size: 4.5rem; letter-spacing: 6px; }
+      .dynamic-text { font-size: 2rem; margin: 20px 0; }
+      .btn { padding: 12px 30px; font-size: 1rem; }
+      .categories { gap: 20px; }
+      .cat h3 { font-size: 1.5rem; padding: 25px 20px; }
+      .subdomains.open { padding: 20px 15px; }
+      .item { padding: 15px 18px; font-size: 1rem; }
     }
-    body.light-mode header .logo-tec {
-      text-shadow: none;
-    }
-    body.light-mode .cat {
-      background: rgba(0, 100, 255, 0.08);
-      border-color: rgba(0, 100, 255, 0.4);
-    }
-    body.light-mode .item {
-      background: rgba(0, 0, 0, 0.06);
-      border-color: rgba(0, 100, 255, 0.3);
-      color: #000;
-    }
-    body.light-mode .item:hover {
-      background: rgba(0, 100, 255, 0.3);
-      color: #fff;
-    }
-    body.light-mode h1,
-    body.light-mode h3 {
-      color: #000;
-    }
-    #themeToggle {
-      position: fixed;
-      top: 25px;
-      left: 25px;
-      background: linear-gradient(90deg, #00ff9d, #00c6ff);
-      border: none;
-      padding: 12px 25px;
-      border-radius: 40px;
-      color: #000;
-      font-weight: 800;
-      cursor: pointer;
-      z-index: 999;
-      box-shadow: 0 0 15px rgba(0,198,255,0.6);
-      transition: .3s;
-    }
-    #themeToggle:hover {
-      transform: scale(1.08);
+
+    @media (max-width: 480px) {
+      header { padding: 70px 10px 50px; }
+      .logo-tec { font-size: 3.5rem; letter-spacing: 4px; }
+      .dynamic-text { font-size: 1.5rem; margin: 15px 0; }
+      .btn { padding: 10px 20px; font-size: 0.9rem; }
+      .cat h3 { font-size: 1.3rem; padding: 20px 15px; }
+      .item { padding: 12px 15px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
-
-  <!-- ⭐ NEW – زر تغيير الوضع -->
   <button id="themeToggle">Light Mode</button>
-
   <canvas id="bg"></canvas>
-
   <header>
     <div class="logo-tec">TEC</div>
     <h1>Titan Elite Commerce</h1>
@@ -92,49 +75,48 @@
   <section class="categories">
 
     <div class="cat"><h3>Commerce & Finance</h3><div class="subdomains" id="commerce"><div class="grid">
-      <a href="/?open=commerce" class="item">Commerce</a>
-      <a href="/?open=commerce" class="item">Ecommerce</a>
-      <a href="/?open=commerce" class="item">FundX</a>
-      <a href="/?open=commerce" class="item">Assets</a>
-      <a href="/?open=commerce" class="item">NBF</a>
-      <a href="/?open=commerce" class="item">DX</a>
+      <a href="https://commerce.pi" class="item">Commerce</a>
+      <a href="https://ecommerce.pi" class="item">Ecommerce</a>
+      <a href="https://assets.pi" class="item">Assets</a>
+      <a href="https://fundx.pi" class="item">Fundx</a>
+      <a href="https://dx.pi" class="item">Dx</a>
+      <a href="https://analytics.pi" class="item">Analytics</a>
+      <a href="https://nbf.pi" class="item">Nbf</a>
     </div></div></div>
 
     <div class="cat"><h3>Lifestyle & Elite</h3><div class="subdomains" id="lifestyle"><div class="grid">
-      <a href="/?open=lifestyle" class="item">Life</a>
-      <a href="/?open=lifestyle" class="item">Estate</a>
-      <a href="/?open=lifestyle" class="item">VIP</a>
-      <a href="/?open=lifestyle" class="item">Elite</a>
-      <a href="/?open=lifestyle" class="item">Titan</a>
-      <a href="/?open=lifestyle" class="item">Legend</a>
-      <a href="/?open=lifestyle" class="item">Epic</a>
+      <a href="https://life.pi" class="item">Life</a>
+      <a href="https://estate.pi" class="item">Estate</a>
+      <a href="https://vip.pi" class="item">VIP</a>
+      <a href="https://elite.pi" class="item">Elite</a>
+      <a href="https://titan.pi" class="item">Titan</a>
+      <a href="https://legend.pi" class="item">Legend</a>
+      <a href="https://epic.pi" class="item">Epic</a>
     </div></div></div>
 
     <div class="cat"><h3>Technology & Tools</h3><div class="subdomains" id="tech"><div class="grid">
-      <a href="/?open=tech" class="item">Analytics</a>
-      <a href="/?open=tech" class="item">Explorer</a>
-      <a href="/?open=tech" class="item">Alert</a>
-      <a href="/?open=tech" class="item">System</a>
-      <a href="/?open=tech" class="item">NX</a>
-      <a href="/?open=tech" class="item">Connection</a>
-      <a href="/?open=tech" class="item">TEC</a>
+      <a href="https://nx.pi" class="item">Nx</a>
+      <a href="https://tec.pi" class="item">TEC</a>
+      <a href="https://explorer.pi" class="item">Explorer</a>
+      <a href="https://system.pi" class="item">System</a>
+      <a href="https://alert.pi" class="item">Alert</a>
+      <a href="https://connection.pi" class="item">Connection</a>
     </div></div></div>
 
     <div class="cat"><h3>Network & Partners</h3><div class="subdomains" id="network"><div class="grid">
-      <a href="/?open=network" class="item">Nexus</a>
-      <a href="/?open=network" class="item">Brookfield</a>
-      <a href="/?open=network" class="item">SAB</a>
-      <a href="/?open=network" class="item">Insure</a>
-      <a href="/?open=network" class="item">Zone</a>
+      <a href="https://nexus.pi" class="item">Nexus</a>
+      <a href="https://brookfield.pi" class="item">Brookfield</a>
+      <a href="https://sab.pi" class="item">SAB</a>
+      <a href="https://zone.pi" class="item">Zone</a>
+      <a href="https://insure.pi" class="item">Insure</a>
     </div></div></div>
 
   </section>
 
   <script>
-    // قراءة الـ ?open= من اللينك وفتح القسم المناسب
     const urlParams = new URLSearchParams(window.location.search);
     const open = urlParams.get('open');
-    if(open === 'commerce' || open === 'lifestyle' || open === 'tech' || open === 'network'){
+    if(open && ['commerce','lifestyle','tech','network'].includes(open)){
       setTimeout(() => {
         const section = document.getElementById(open);
         section.classList.add('open');
@@ -143,7 +125,6 @@
       }, 500);
     }
 
-    // فتح وإغلاق يدوي
     document.querySelectorAll('.cat h3').forEach(h => {
       h.onclick = () => {
         h.classList.toggle('open');
@@ -151,7 +132,6 @@
       };
     });
 
-    // نص متغير
     const words = ["Elite","Titan","Luxury","Innovation","Pi Ecosystem","Future"];
     let i = 0;
     setInterval(() => {
@@ -159,7 +139,6 @@
       i = (i + 1) % words.length;
     }, 1800);
 
-    // خلفية الجسيمات
     const canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
     canvas.width = innerWidth; canvas.height = innerHeight;
     window.addEventListener('resize', () => {canvas.width = innerWidth; canvas.height = innerHeight;});
@@ -179,7 +158,6 @@
       requestAnimationFrame(anim);
     })();
 
-    // Pi SDK
     if(typeof Pi !== 'undefined'){
       Pi.init({version:"2.0", sandbox:true});
       document.getElementById('piLoginBtn').onclick = () => Pi.authenticate(['username'],()=>{}).then(a=>alert("Welcome " + a.user.username)).catch(()=>alert("Failed"));
@@ -190,7 +168,6 @@
       });
     }
 
-    /* ⭐ NEW – نظام تبديل الوضع + حفظه */
     const themeBtn = document.getElementById("themeToggle");
     if (localStorage.getItem("theme") === "light") {
       document.body.classList.add("light-mode");
