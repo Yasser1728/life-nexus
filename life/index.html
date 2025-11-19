@@ -4,113 +4,114 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TEC | Titan Elite Commerce</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
   <style>
     *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Cairo',sans-serif;background:#0a0e2b;color:#fff;overflow-x:hidden;}
-    canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.7;}
-    header{text-align:center;padding:100px 15px 60px;}
-    .logo-tec{font-size:16vw;font-weight:900;background:linear-gradient(90deg,#00ff9d,#00c6ff,#0072ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .dynamic-text{font-size:7vw;font-weight:900;background:linear-gradient(90deg,#00ff9d,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:25px 0;}
-    .btn{display:inline-block;background:linear-gradient(90deg,#0072ff,#00c6ff);color:#fff;padding:14px 40px;margin:8px;border-radius:50px;font-weight:700;}
-    .pi-btn{background:linear-gradient(90deg,#ff8c00,#ff5e00);}
-    .categories{margin:60px 15px;display:flex;flex-direction:column;gap:25px;}
-    .cat{background:rgba(0,198,255,0.15);border:2px solid rgba(0,198,255,0.5);border-radius:24px;overflow:hidden;}
-    .cat h3{background:linear-gradient(135deg,#0072ff,#00c6ff);padding:28px;font-size:1.7rem;text-align:center;color:#fff;cursor:pointer;}
-    .subdomains{max-height:0;overflow:hidden;transition:max-height 0.8s ease;background:rgba(0,114,255,0.08);}
-    .subdomains.open{max-height:3000px;padding:25px 15px;}
-    .grid{display:flex;flex-direction:column;gap:14px;}
-    .item{background:rgba(255,255,255,0.1);padding:18px;border-radius:16px;text-align:center;font-weight:700;font-size:1.2rem;color:#00ff9d;}
+    body{font-family:'Cairo',sans-serif;line-height:1.6;overflow-x:hidden;background:#0b0114;color:#fff;}
+    canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+    header{text-align:center;padding:120px 20px 80px;}
+    .logo{font-size:5.5rem;font-weight:700;color:#a53cff;text-shadow:0 0 30px #a53cff,0 0 40px #b86bff;letter-spacing:10px;margin-bottom:5px;}
+    h1{font-size:1.8rem;opacity:0.9;margin-bottom:15px;letter-spacing:3px;}
+    .dynamic-text{font-size:1.9rem;font-weight:700;color:#fff;text-shadow:0 0 20px #a53cff;margin:35px 0;min-height:40px;}
+    p{font-size:1.15rem;margin:25px 0;opacity:0.8;}
+    .btn{display:inline-block;background:linear-gradient(90deg,#a53cff,#6a00ff);color:#fff;padding:14px 42px;margin:10px;border-radius:50px;font-weight:700;transition:.3s;box-shadow:0 5px 20px rgba(165,60,255,0.4);}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 15px 30px rgba(165,60,255,0.6);}
+    .pi-btn{background:linear-gradient(90deg,#2a76f7,#007bff);box-shadow:0 5px 20px rgba(42,118,247,0.4);}
+    .pi-btn:hover{box-shadow:0 15px 30px rgba(42,118,247,0.6);}
+    .domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:20 volta;margin:60px 20px;opacity:0;transform:translateY(30px);transition:opacity 1s ease, transform 1s ease;}
+    .domains.revealed{opacity:1;transform:translateY(0);}
+    .card{background:rgba(165,60,255,0.1);border:1px solid rgba(165,60,255,0.4);padding:22px;border-radius:20px;text-align:center;font-weight:700;font-size:1.1rem;transition:.4s;box-shadow:0 5px 15px rgba(0,0,0,0.4);}
+    .card:hover{transform:scale(1.05);background:rgba(165,60,255,0.25);box-shadow:0 0 40px #a53cff;}
+    .contact{padding:90px 20px;background:linear-gradient(135deg,#0b0114,#1a0033);text-align:center;opacity:0;transform:translateY(30px);transition:opacity 1s ease, transform 1s ease;}
+    .contact.revealed{opacity:1;transform:translateY(0);}
+    footer{text-align:center;padding:35px;background:#000;color:#888;font-size:0.95rem;opacity:0;transform:translateY(20px);transition:opacity 1s ease, transform 1s ease;}
+    footer.revealed{opacity:1;transform:translateY(0);}
+    @media (max-width:600px){.logo{font-size:4rem;letter-spacing:5px;}h1{font-size:1.5rem;}.dynamic-text{font-size:1.5rem;}.btn{padding:10px 30px;margin:8px;}.domains{margin:40px 10px;gap:15px;}}
   </style>
 </head>
-<body>
+<body class="dark">
   <canvas id="bg"></canvas>
 
   <header>
-    <div class="logo-tec">TEC</div>
+    <div class="logo">TEC</div>
     <h1>Titan Elite Commerce</h1>
     <div class="dynamic-text" id="dynamicText">Elite</div>
+    <p>Luxury Commerce • Finance • Technology • Elite Ecosystem on Pi Network</p>
+    <a href="#domains" class="btn">Explore Projects</a>
     <a href="#" id="piLoginBtn" class="btn pi-btn">Login with Pi</a>
-    <a href="#" id="piPaymentBtn" class="btn pi-btn">Test Payment</a>
+    <a href="#" id="piPaymentBtn" class="btn pi-btn">Test Pi Payment</a>
+    <a href="#contact" class="btn">Contact Us</a>
   </header>
 
-  <section class="categories">
-
-    <div class="cat"><h3>Commerce & Finance</h3><div class="subdomains" id="commerce"><div class="grid">
-      <div class="item">commerce.tec-pi.com</div>
-      <div class="item">ecommerce.tec-pi.com</div>
-      <div class="item">fundx.tec-pi.com</div>
-      <div class="item">assets.tec-pi.com</div>
-      <div class="item">nbf.tec-pi.com</div>
-      <div class="item">dx.tec-pi.com</div>
-    </div></div></div>
-
-    <div class="cat"><h3>Lifestyle & Elite</h3><div class="subdomains" id="lifestyle"><div class="grid">
-      <div class="item">life.tec-pi.com</div>
-      <div class="item">estate.tec-pi.com</div>
-      <div class="item">vip.tec-pi.com</div>
-      <div class="item">elite.tec-pi.com</div>
-      <div class="item">titan.tec-pi.com</div>
-      <div class="item">legend.tec-pi.com</div>
-      <div class="item">epic.tec-pi.com</div>
-    </div></div></div>
-
-    <div class="cat"><h3>Technology & Tools</h3><div class="subdomains" id="tech"><div class="grid">
-      <div class="item">analytics.tec-pi.com</div>
-      <div class="item">explorer.tec-pi.com</div>
-      <div class="item">alert.tec-pi.com</div>
-      <div class="item">system.tec-pi.com</div>
-      <div class="item">nx.tec-pi.com</div>
-      <div class="item">connection.tec-pi.com</div>
-      <div class="item">tec.tec-pi.com</div>
-    </div></div></div>
-
-    <div class="cat"><h3>Network & Partners</h3><div class="subdomains" id="network"><div class="grid">
-      <div class="item">nexus.tec-pi.com</div>
-      <div class="item">brookfield.tec-pi.com</div>
-      <div class="item">sab.tec-pi.com</div>
-      <div class="item">insure.tec-pi.com</div>
-      <div class="item">zone.tec-pi.com</div>
-    </div></div></div>
-
+  <section id="domains" class="domains">
+    <a href="../life/" class="card">Life</a>
+    <a href="../insure/" class="card">Insure</a>
+    <a href="../commerce/" class="card">Commerce</a>
+    <a href="../ecommerce/" class="card">Ecommerce</a>
+    <a href="../assets/" class="card">Assets</a>
+    <a href="../fundx/" class="card">Fundx</a>
+    <a href="../dx/" class="card">Dx</a>
+    <a href="../analytics/" class="card">Analytics</a>
+    <a href="../nbf/" class="card">Nbf</a>
+    <a href="../epic/" class="card">Epic</a>
+    <a href="../legend/" class="card">Legend</a>
+    <a href="../connection/" class="card">Connection</a>
+    <a href="../system/" class="card">System</a>
+    <a href="../alert/" class="card">Alert</a>
+    <a href="../tec/" class="card">Tec</a>
+    <a href="../estate/" class="card">Estate</a>
+    <a href="../nx/" class="card">Nx</a>
+    <a href="../explorer/" class="card">Explorer</a>
+    <a href="../nexus/" class="card">Nexus</a>
+    <a href="../brookfield/" class="card">Brookfield</a>
+    <a href="../sab/" class="card">Sab</a>
+    <a href="../vip/" class="card">Vip</a>
+    <a href="../elite/" class="card">Elite</a>
+    <a href="../titan/" class="card">Titan</a>
+    <a href="../zone/" class="card">Zone</a>
   </section>
 
+  <section id="contact" class="contact">
+    <h2>Ready to Join TEC?</h2>
+    <p>Partnerships • Investments • Luxury Services</p>
+  </section>
+
+  <footer>
+    <p>© 2025 TEC — Titan Elite Commerce. All Rights Reserved.</p>
+  </footer>
+
   <script>
-    // نفس الكود بتاع فتح القسم تلقائي
+    // فتح القسم تلقائي + Reveal
     const path = window.location.pathname.toLowerCase();
-    let section = null;
-    if (path.includes('commerce') || path.includes('ecommerce') || path.includes('fundx') || path.includes('assets') || path.includes('nbf') || path.includes('dx')) section = 'commerce';
-    else if (path.includes('life') || path.includes('estate') || path.includes('vip') || path.includes('elite') || path.includes('titan') || path.includes('legend') || path.includes('epic')) section = 'lifestyle';
-    else if (path.includes('analytics') || path.includes('explorer') || path.includes('alert') || path.includes('system') || path.includes('nx') || path.includes('connection') || path.includes('tec/')) section = 'tech';
-    else if (path.includes('nexus') || path.includes('brookfield') || path.includes('sab') || path.includes('insure') || path.includes('zone')) section = 'network';
+    if (path.includes('life')) document.querySelector('a[href="../life/"]').parentElement.scrollIntoView({behavior:"smooth"});
+    else if (path.includes('insure')) document.querySelector('a[href="../insure/"]').parentElement.scrollIntoView({behavior:"smooth"});
+    else if (path.includes('commerce')) document.querySelector('a[href="../commerce/"]').parentElement.scrollIntoView({behavior:"smooth"});
+    // أضف الباقي لو عايز
 
-    if (section) {
-      setTimeout(() => {
-        const el = document.getElementById(section);
-        el.classList.add('open');
-        el.previousElementSibling.classList.add('open');
-        el.previousElementSibling.scrollIntoView({behavior: "smooth"});
-      }, 700);
-    }
-
-    document.querySelectorAll('.cat h3').forEach(h => h.onclick = () => {
-      h.classList.toggle('open');
-      h.nextElementSibling.classList.toggle('open');
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.domains, .contact, footer').forEach(el => {
+        el.classList.add('revealed');
+      });
     });
 
+    // Pi SDK
+    if (typeof Pi !== 'undefined') {
+      Pi.init({ version: "2.0", sandbox: true });
+      document.getElementById('piLoginBtn').onclick = () => Pi.authenticate(['username'],()=>{}).then(a=>alert("Welcome " + a.user.username)).catch(()=>alert("Failed"));
+      document.getElementById('piPaymentBtn').onclick = () => Pi.createPayment({amount:0.01,memo:"TEC Test"},{onReadyForServerApproval:()=>alert("Approve"),onReadyForServerCompletion:(p,t)=>alert("Paid! "+t),onCancel:()=>alert("Cancelled")});
+    }
+
+    // Particles + Dynamic Text (مختصر)
     const words = ["Elite","Titan","Luxury","Innovation","Pi Ecosystem","Future"];
     let i = 0;
-    setInterval(() => { document.getElementById("dynamicText").textContent = words[i]; i = (i + 1) % words.length; }, 1800);
+    setInterval(() => document.getElementById("dynamicText").textContent = words[i++ % words.length], 1800);
 
-    // Particles + Pi SDK (مختصر)
     const canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
     canvas.width = innerWidth; canvas.height = innerHeight;
     window.addEventListener('resize', () => {canvas.width = innerWidth; canvas.height = innerHeight;});
     const particles = Array.from({length:100},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.8,dy:(Math.random()-0.5)*0.8}));
-    (function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(0,198,255,0.7)";ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});requestAnimationFrame(anim);})();
-
-    if(typeof Pi !== 'undefined') Pi.init({version:"2.0", sandbox:true});
+    (function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(165,60,255,0.7)";ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});requestAnimationFrame(anim);})();
   </script>
 </body>
 </html>
