@@ -8,140 +8,124 @@
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 
   <style>
-    /* ====== الإعدادات العامة والتصميم الأساسي ====== */
     *{box-sizing:border-box;margin:0;padding:0;}
     body{
       font-family:'Cairo',sans-serif;
       line-height:1.6;
       overflow-x:hidden;
-      background:#0b0114; /* خلفية داكنة احترافية */
+      background:#0a0e2b;
       color:#fff;
       transition:all .5s;
     }
     a{text-decoration:none;color:inherit;}
 
-    /* وضع الإضاءة (Light Mode) */
-    body.light{background:#f9f9f9;color:#111;}
-    body.light .card{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.1);}
-    body.light .card:hover{box-shadow:0 0 10px rgba(0,0,0,0.2);}
-    body.light .contact{background:linear-gradient(135deg,#e0e0e0,#f0f0f0);}
+    /* Light Mode */
+    body.light{background:#f5f7ff;color:#111;}
+    body.light .card{background:rgba(255,255,255,0.1);border-color:rgba(0,123,255,0.3);}
 
-    /* الخلفية المتحركة (Canvas) */
-    canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+    canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.6;}
 
-    /* ====== الرأس (Header) ====== */
     header{text-align:center;padding:120px 20px 80px;position:relative;}
     .logo-tec{
-      font-size:5.5rem;
+      font-size:6rem;
       font-weight:700;
-      color:#a53cff; /* لون النيون الأساسي */
-      text-shadow:0 0 30px #a53cff, 0 0 40px #b86bff; /* تأثير النيون القوي */
-      letter-spacing:10px;
-      margin-bottom:5px;
+      background:linear-gradient(90deg,#00d4ff,#0099ff,#0066ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 40px rgba(0,123,255,0.6);
+      letter-spacing:8px;
     }
-    h1{font-size:1.8rem;opacity:0.9;margin-bottom:15px;letter-spacing:3px;}
-    
-    /* النص المتحرك (Dynamic Text) */
-    .dynamic-text{
-      font-size:1.9rem;
-      font-weight:700;
-      color:#fff;
-      text-shadow:0 0 20px #a53cff;
-      margin:35px 0;
-      min-height:40px; /* لضمان عدم اهتزاز الصفحة */
-    }
-    p{font-size:1.15rem;margin:25px 0;opacity:0.8;}
+    h1{font-size:1.9rem;opacity:0.9;letter-spacing:4px;margin:15px 0;}
 
-    /* ====== الأزرار (Buttons) ====== */
+    .dynamic-text{
+      font-size:2.1rem;
+      font-weight:700;
+      background:linear-gradient(90deg,#00d4ff,#0066ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      min-height:50px;
+    }
+
     .btn{
       display:inline-block;
-      background:linear-gradient(90deg,#a53cff,#6a00ff);
+      background:linear-gradient(90deg,#0066ff,#0099ff);
       color:#fff;
-      padding:14px 42px;
-      margin:10px;
+      padding:15px 45px;
+      margin:12px;
       border-radius:50px;
       font-weight:700;
-      transition:.3s;
-      box-shadow:0 5px 20px rgba(165,60,255,0.4);
+      transition:.4s;
+      box-shadow:0 8px 25px rgba(0,102,255,0.4);
     }
-    .btn:hover{
-      transform:translateY(-4px);
-      box-shadow:0 15px 30px rgba(165,60,255,0.6);
-    }
-    .pi-btn{background:linear-gradient(90deg,#2a76f7,#007bff);box-shadow:0 5px 20px rgba(42,118,247,0.4);}
-    .pi-btn:hover{box-shadow:0 15px 30px rgba(42,118,247,0.6);}
+    .btn:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,102,255,0.6);}
 
-    /* ====== المشاريع (Domains/Cards) ====== */
+    .pi-btn{background:linear-gradient(90deg,#ff6b00,#ff8c33);box-shadow:0 8px 25px rgba(255,107,0,0.4);}
+    .pi-btn:hover{box-shadow:0 20px 40px rgba(255,107,0,0.6);}
+
     .domains{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-      gap:20px;
-      margin:60px 20px;
+      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:22px;
+      margin:80px 20px;
       opacity:0;
-      transform:translateY(30px);
-      transition:opacity 1s ease, transform 1s ease;
+      transform:translateY(40px);
+      transition:all 1.2s ease;
     }
+    .domains.revealed{opacity:1;transform:translateY(0);}
+
     .card{
-      background:rgba(165,60,255,0.1);
-      border:1px solid rgba(165,60,255,0.4);
-      padding:22px;
-      border-radius:20px;
+      background:rgba(0,102,255,0.15);
+      border:1px solid rgba(0,123,255,0.5);
+      padding:28px;
+      border-radius:22px;
       text-align:center;
       font-weight:700;
-      font-size:1.1rem;
-      transition:.4s;
-      box-shadow:0 5px 15px rgba(0,0,0,0.4);
+      font-size:1.2rem;
+      transition:.5s;
+      backdrop-filter:blur(10px);
     }
     .card:hover{
-      transform:scale(1.05); /* تغيير طفيف لجعله احترافياً أكثر من translateY */
-      background:rgba(165,60,255,0.25);
-      box-shadow:0 0 40px #a53cff;
+      transform:scale(1.08);
+      background:rgba(0,102,255,0.3);
+      box-shadow:0 0 50px rgba(0,123,255,0.6);
     }
 
-    /* ====== قسم التواصل (Contact) ====== */
     .contact{
-      padding:90px 20px;
-      background:linear-gradient(135deg,#0b0114,#1a0033);
+      padding:100px 20px;
       text-align:center;
-      opacity:0;
-      transform:translateY(30px);
-      transition:opacity 1s ease, transform 1s ease;
+      background:linear-gradient(135deg,#0a0e2b,#001133);
     }
     .contact h2{
-      font-size:2.8rem;
-      color:#a53cff;
-      text-shadow:0 0 25px #a53cff;
-      margin-bottom:10px;
+      font-size:3rem;
+      background:linear-gradient(90deg,#00d4ff,#0066ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
-    .call-btn{
-      background:linear-gradient(90deg,#6a0dad,#9b30ff);
-      padding:16px 50px;
-      font-size:1.3rem;
-      border-radius:50px;
+    .social-btn{
+      display:inline-block;
+      width:60px;height:60px;
+      background:#0066ff;
+      color:#fff;
+      line-height:60px;
+      border-radius:50%;
+      margin:20px 10px;
+      font-size:1.8rem;
+      transition:.3s;
     }
-    .phone-number-text{font-size:1.1rem;opacity:0.7;margin-top:10px;}
+    .social-btn:hover{transform:scale(1.15);background:#0099ff;}
 
-    /* ====== التذييل (Footer) ====== */
     footer{
       text-align:center;
-      padding:35px;
+      padding:40px;
       background:#000;
-      color:#888;
-      font-size:0.95rem;
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity 1s ease, transform 1s ease;
+      color:#666;
     }
-    
-    /* تحسينات الاستجابة (Responsive) */
+    .theme-switch{position:fixed;top:20px;right:20px;cursor:pointer;font-size:1.5rem;z-index:10;}
+
     @media (max-width: 600px) {
-        .logo-tec {font-size: 4rem; letter-spacing: 5px;}
-        h1 {font-size: 1.5rem;}
-        .dynamic-text {font-size: 1.5rem;}
-        .btn {padding: 10px 30px; margin: 8px;}
-        .domains {margin: 40px 10px; gap: 15px;}
-        .contact h2 {font-size: 2rem;}
-        .call-btn {font-size: 1.1rem; padding: 12px 40px;}
+      .logo-tec {font-size:4.5rem;}
+      .dynamic-text {font-size:1.7rem;}
+      .btn {padding:12px 35px;}
     }
   </style>
 </head>
@@ -153,146 +137,123 @@
     <div class="logo-tec">TEC</div>
     <h1>Titan Elite Commerce</h1>
     <div class="dynamic-text" id="dynamicText">Elite</div>
-    <p>Luxury Commerce • Finance • Technology • Elite Ecosystem on Pi Network</p>
+    <p>Luxury Commerce • Finance • Technology • Official Pi Ecosystem Project</p>
     
     <a href="#domains" class="btn">Explore Projects</a>
     <a href="#" id="piLoginBtn" class="btn pi-btn">Login with Pi</a>
-    <a href="#" id="piPaymentBtn" class="btn pi-btn">Test Pi Payment</a>
+    <a href="#" id="piPaymentBtn" class="btn pi-btn">Test Payment</a>
     <a href="#contact" class="btn">Contact Us</a>
   </header>
 
   <section id="domains" class="domains">
-    <a href="life/" class="card">Life</a>
-    <a href="insure/" class="card">Insure</a>
-    <a href="commerce/" class="card">Commerce</a>
-    <a href="ecommerce/" class="card">Ecommerce</a>
-    <a href="assets/" class="card">Assets</a>
-    <a href="fundx/" class="card">Fundx</a>
-    <a href="dx/" class="card">Dx</a>
-    <a href="analytics/" class="card">Analytics</a>
-    <a href="nbf/" class="card">Nbf</a>
-    <a href="epic/" class="card">Epic</a>
-    <a href="legend/" class="card">Legend</a>
-    <a href="connection/" class="card">Connection</a>
-    <a href="system/" class="card">System</a>
-    <a href="alert/" class="card">Alert</a>
-    <a href="tec/" class="card">Tec</a>
-    <a href="estate/" class="card">Estate</a>
-    <a href="nx/" class="card">Nx</a>
-    <a href="explorer/" class="card">Explorer</a>
-    <a href="nexus/" class="card">Nexus</a>
-    <a href="brookfield/" class="card">Brookfield</a>
-    <a href="sab/" class="card">Sab</a>
-    <a href="vip/" class="card">Vip</a>
+    <!-- الكروت غيرت ترتيبها وعدد العناصر في السطر عشان تبقى مختلفة -->
     <a href="elite/" class="card">Elite</a>
     <a href="titan/" class="card">Titan</a>
-    <a href="zone/" class="card">Zone</a>
+    <a href="commerce/" class="card">Commerce</a>
+    <a href="fundx/" class="card">FundX</a>
+    <a href="estate/" class="card">Estate</a>
+    <a href="nexus/" class="card">Nexus</a>
+    <a href="dx/" class="card">DX</a>
+    <a href="vip/" class="card">VIP</a>
+    <!-- باقي الكروت زي ما هي أو شيل اللي مش جاهز -->
   </section>
 
   <section id="contact" class="contact">
-    <h2>Ready to Join TEC?</h2>
-    <p style="font-size:1.15rem;opacity:0.9;margin:15px 0;">Partnerships • Investments • Luxury Services</p>
-    <a href="tel:01115141346" class="call-btn">Call Us Now</a>
-    <p class="phone-number-text">01115141346</p>
+    <h2>Join the Future</h2>
+    <p style="font-size:1.2rem;margin:20px 0;max-width:700px;margin-left:auto;margin-right:auto;">
+      Official contact channels only. We never ask for Pi payments except through the official app.
+    </p>
+    <div>
+      <a href="https://t.me/YourOfficialChannel" class="social-btn">✈</a> <!-- غيّر اللينك لقناتك الرسمية -->
+      <a href="mailto:contact@tec-pi.com" class="social-btn">✉</a>
+    </div>
+    <p style="margin-top:30px;color:#00d4ff;">
+      contact@tec-pi.com<br>
+      Official Telegram: @YourUsername
+    </p>
   </section>
 
   <footer>
-    <p>© 2025 TEC — Titan Elite Commerce. All Rights Reserved.</p>
+    <p>© 2025 TEC — Titan Elite Commerce | <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></p>
   </footer>
 
   <script>
-    // =======================================
-    // [Pi SDK Authentication & Payment Code]
-    // =======================================
+    // === Pi SDK - غير الـ App ID ده للجديد بتاعك ===
     if (typeof Pi !== 'undefined') {
-        Pi.init({ version: "2.0", sandbox: true, app_id: "z-4f622fa3756f5cea" });
-        const piLoginBtn = document.getElementById('piLoginBtn');
-        const piPaymentBtn = document.getElementById('piPaymentBtn');
+        Pi.init({ version: "2.0", sandbox: true }); // لما تكون جاهز غيّر sandbox: false
+        // روح هنا وسجل app جديد: https://developers.piapps.io
+        // بعد ما تخلّص حط الـ app_id الجديد هنا:
+        const YOUR_NEW_APP_ID = "أدخل_App_ID_الجديد_هنا";
 
-        piLoginBtn.addEventListener('click', () => {
+        document.getElementById('piLoginBtn').addEventListener('click', () => {
             Pi.authenticate(['username'], () => {})
             .then(auth => {
-                alert(`Welcome back, ${auth.user.username}!`);
-                piLoginBtn.textContent = `Hello, ${auth.user.username}`;
-                piLoginBtn.style.pointerEvents = 'none';
-            })
-            .catch(err => alert('Login failed'));
+                alert(`Welcome, ${auth.user.username}!`);
+            }).catch(() => alert('Login failed'));
         });
 
-        piPaymentBtn.addEventListener('click', () => {
+        document.getElementById('piPaymentBtn').addEventListener('click', () => {
             Pi.createPayment({
                 amount: 0.01,
-                memo: "TEC Test Transaction",
-                metadata: { type: "test_listing_requirement" }
+                memo: "TEC Test – Official",
+                metadata: { project: "tec_official" }
             }, {
-                onReadyForServerApproval: () => alert('Approve in Pi Wallet'),
-                onReadyForServerCompletion: (p, txid) => alert('Paid! TXID: ' + txid),
+                onReadyForServerApproval: () => alert('Open Pi Wallet to approve'),
+                onReadyForServerCompletion: (paymentId, txid) => alert('Success! TX: ' + txid),
                 onCancel: () => alert('Cancelled'),
-                onError: (err) => alert('Error: ' + err)
+                onError: (error) => alert('Error: ' + error)
             });
         });
-    } else {
-        console.warn("Pi SDK is not loaded. Functionality disabled.");
     }
-    // =======================================
 
-    // ====== النص المتحرك (Dynamic Text) ======
-    const words = ["TEC","Elite","Titan","Luxury","Commerce","Finance","Innovation"];
+    // Dynamic Text
+    const words = ["Elite","Titan","Luxury","Innovation","Pi Ecosystem","Future"];
     let i = 0;
-    const dynamicText = document.getElementById("dynamicText");
     setInterval(() => {
-      dynamicText.textContent = words[i];
+      document.getElementById("dynamicText").textContent = words[i];
       i = (i + 1) % words.length;
-    }, 1800); // تغيير الكلمة كل 1.8 ثانية
+    }, 2000);
 
-    // ====== مؤثرات الانتقال عند التمرير (Scroll Reveal) ======
-    function revealOnScroll() {
-        const elements = document.querySelectorAll('.domains, .contact, footer');
-        const windowBottom = window.innerHeight + window.scrollY;
-        elements.forEach(el => {
-            // كشف العنصر عندما يكون أعلى بـ 100 بكسل من أسفل النافذة
-            if (el.offsetTop < windowBottom - 100) {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }
-        });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll); // للتأكد من ظهورها عند تحميل الصفحة
+    // Scroll Reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('revealed');
+      });
+    });
+    observer.observe(document.querySelector('.domains'));
 
-    // ====== خلفية الجسيمات (Canvas Particles) ======
+    // Particles Background (نفس اللي كان بس بلون أزرق)
     const canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
 
-    const particles = Array.from({length:100},()=>({
+    const particles = Array.from({length:120},()=>({
       x:Math.random()*canvas.width,
       y:Math.random()*canvas.height,
-      r:Math.random()*2+1, // نصف قطر أصغر قليلاً
-      dx:(Math.random()-0.5)*0.8,
-      dy:(Math.random()-0.5)*0.8
+      r:Math.random()*2+1,
+      dx:(Math.random()-0.5)*0.7,
+      dy:(Math.random()-0.5)*0.7
     }));
-    
+
     (function animate(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
       particles.forEach(p=>{
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(165,60,255,0.7)";
+        ctx.fillStyle="rgba(0,180,255,0.6)";
         ctx.fill();
-        p.x+=p.dx;p.y+=p.dy;
-        // ارتداد الجسيمات
+        p.x+=p.dx; p.y+=p.dy;
         if(p.x<0||p.x>canvas.width)p.dx*=-1;
         if(p.y<0||p.y>canvas.height)p.dy*=-1;
       });
       requestAnimationFrame(animate);
     })();
 
-    // ====== التبديل بين الوضعين (Theme Switch) ======
+    // Theme Switch
     document.getElementById('themeSwitch').onclick = () => {
         document.body.classList.toggle('light');
         document.body.classList.toggle('dark');
